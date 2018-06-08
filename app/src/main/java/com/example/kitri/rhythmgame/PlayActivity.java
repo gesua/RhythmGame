@@ -19,19 +19,6 @@ public class PlayActivity extends Activity {
 
     NoteThread noteThread = new NoteThread();
 
-    public ImageView testNote() {
-        ImageView iv = new ImageView(PlayActivity.this);
-        iv.setImageResource(R.drawable.note);
-        iv.setPivotX(75);
-        iv.setPivotY(15);
-        iv.setLayoutParams(new ViewGroup.LayoutParams(150, 30));
-        iv.setScaleType(ImageView.ScaleType.FIT_XY);
-        iv.setVisibility(View.GONE);
-        layout_play.addView(iv);
-
-        return iv;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +58,7 @@ public class PlayActivity extends Activity {
         noteThread.start();
 
         for (int i = 0; i < beats.length; i++) {
-            Note note = new Note(beats[i].getNoteName(), testNote(), handler);
+            Note note = new Note(beats[i].getNoteName(), createNoteImage(), handler);
             noteThread.noteAdd(note);
         }
 
@@ -81,7 +68,7 @@ public class PlayActivity extends Activity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox1.setVisibility(View.VISIBLE);
 
-                    Note note = new Note("1", testNote(), handler);
+                    Note note = new Note("1", createNoteImage(), handler);
                     noteThread.noteAdd(note);
                 }
 
@@ -99,7 +86,7 @@ public class PlayActivity extends Activity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox2.setVisibility(View.VISIBLE);
 
-                    Note note = new Note("2", testNote(), handler);
+                    Note note = new Note("2", createNoteImage(), handler);
                     noteThread.noteAdd(note);
                 }
 
@@ -117,7 +104,7 @@ public class PlayActivity extends Activity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox3.setVisibility(View.VISIBLE);
 
-                    Note note = new Note("3", testNote(), handler);
+                    Note note = new Note("3", createNoteImage(), handler);
                     noteThread.noteAdd(note);
                 }
 
@@ -134,7 +121,7 @@ public class PlayActivity extends Activity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox4.setVisibility(View.VISIBLE);
 
-                    Note note = new Note("4", testNote(), handler);
+                    Note note = new Note("4", createNoteImage(), handler);
                     noteThread.noteAdd(note);
                 }
 
@@ -145,5 +132,16 @@ public class PlayActivity extends Activity {
                 return false;
             }
         });
+    }
+
+    public ImageView createNoteImage() {
+        ImageView iv = new ImageView(PlayActivity.this);
+        iv.setImageResource(R.drawable.note);
+        iv.setLayoutParams(new ViewGroup.LayoutParams(150, 30));
+        iv.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv.setVisibility(View.GONE);
+        layout_play.addView(iv);
+
+        return iv;
     }
 }

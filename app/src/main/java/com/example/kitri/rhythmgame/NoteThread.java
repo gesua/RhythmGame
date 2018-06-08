@@ -9,12 +9,7 @@ public class NoteThread extends Thread {
     public void noteAdd(Note note) {
         noteList.add(note);
     }
-//asdfdsff
 
-//    sdfdsafdsf
-//    sdfdsafdsf
-//    sdfdsafdsf
-//    sdfdsafdsf
     @Override
     public void run() {
         try {
