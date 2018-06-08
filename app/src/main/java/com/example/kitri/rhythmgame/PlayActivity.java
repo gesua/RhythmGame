@@ -213,4 +213,10 @@ public class PlayActivity extends Activity {
         Note note = new Note(x, iv, handler);
         noteThread.noteAdd(note);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        beatThread.interrupt();
+    }
 }
