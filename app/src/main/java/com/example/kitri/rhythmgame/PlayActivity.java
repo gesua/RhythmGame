@@ -5,18 +5,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayActivity extends Activity {
     private ConstraintLayout layout_play;
@@ -24,29 +18,14 @@ public class PlayActivity extends Activity {
     private ImageView iv_hitbox1, iv_hitbox2, iv_hitbox3, iv_hitbox4, loca, iv_backbox1, iv_backbox2, iv_backbox3, iv_backbox4;
     private TextView tv_combo, tv_hit, tv_score;
     private Handler handler;
-    private ProgressBar bar;
     private int idValue = 0;
     private int score = 0;
     private int comboCnt = 0;
-    private int cnt=100;
-    private List<Integer> idList=new ArrayList<>();
+
+    private final int NOTE_WIDTH = 200, NOTE_HEIGHT = 30;
 
     NoteThread noteThread = new NoteThread();
-
-    public ImageView testNote() {
-        ImageView iv = new ImageView(PlayActivity.this);
-        iv.setImageResource(R.drawable.note);
-        iv.setPivotX(75);
-        iv.setPivotY(15);
-        iv.setLayoutParams(new ViewGroup.LayoutParams(200, 30));
-        iv.setScaleType(ImageView.ScaleType.FIT_XY);
-        iv.setVisibility(View.GONE);
-        layout_play.addView(iv);
-        iv.setId(idValue);
-        idValue++;
-
-        return iv;
-    }
+    BeatThread beatThread = new BeatThread(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +33,6 @@ public class PlayActivity extends Activity {
         setContentView(R.layout.activity_play);
 
         layout_play = findViewById(R.id.layout_play);
-
-        bar=findViewById(R.id.progress_1);
 
         btn_key1 = findViewById(R.id.btn_key1);
         btn_key2 = findViewById(R.id.btn_key2);
@@ -72,119 +49,79 @@ public class PlayActivity extends Activity {
         iv_backbox3 = findViewById(R.id.iv_backbox3);
         iv_backbox4 = findViewById(R.id.iv_backbox4);
 
-
         tv_combo = findViewById(R.id.tv_combo);
         tv_hit = findViewById(R.id.tv_hit);
         tv_score = findViewById(R.id.tv_score);
-        tv_score.setText("SCORE : 0");
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) { // 노트 밑으로 움직임
-
                     ((ImageView) msg.obj).setX(msg.arg1);
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
                     Float y = ((ImageView) msg.obj).getY();
-
                     for (int i = 0; i < idValue; i++) {
+                        if (y > loca.getTop() + -30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 70 && iv_hitbox1.getVisibility() == View.VISIBLE) {
+                            layout_play.removeView((ImageView) msg.obj);
+                            iv_hitbox1.setVisibility(View.GONE);
 
-                            if (y > loca.getTop() + -30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 70 && iv_hitbox1.getVisibility() == View.VISIBLE) {
-                                layout_play.removeView((ImageView) msg.obj);
-                                iv_hitbox1.setVisibility(View.GONE);
-                                idList.add(((ImageView) msg.obj).getId());
-                                tv_combo.setVisibility(View.VISIBLE);
-                                score += 10;
-                                tv_score.setText("SCORE : " + score);
-                                tv_hit.setText("Good");
-                                comboCnt++;
-                                tv_combo.setText(comboCnt + " combo");
+                            score += 10;
+                            tv_score.setText("SCORE : " + score);
+                            tv_hit.setText("Good");
+                            comboCnt++;
+                            tv_combo.setText(comboCnt + " combo");
+                        } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 320 && iv_hitbox2.getVisibility() == View.VISIBLE) {
+                            //                                layout_play.getViewById(i).setVisibility(View.GONE);
+                            layout_play.removeView((ImageView) msg.obj);
+                            iv_hitbox2.setVisibility(View.GONE);
 
-                            } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 320 && iv_hitbox2.getVisibility() == View.VISIBLE) {
-                                tv_combo.setVisibility(View.VISIBLE);
-                                //                                layout_play.getViewById(i).setVisibility(View.GONE);
-                                layout_play.removeView((ImageView) msg.obj);
-                                iv_hitbox2.setVisibility(View.GONE);
-                                idList.add(((ImageView) msg.obj).getId());
-
-                                score += 10;
-                                tv_score.setText("SCORE : " + score);
-                                tv_hit.setText("Good");
-                                comboCnt++;
-                                tv_combo.setText(comboCnt + " combo");
-
-                            } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 560 && iv_hitbox3.getVisibility() == View.VISIBLE) {
-                                tv_combo.setVisibility(View.VISIBLE);
-                                idList.add(((ImageView) msg.obj).getId());
-                                //                                layout_play.getViewById(i).setVisibility(View.GONE);
-                                layout_play.removeView((ImageView) msg.obj);
-                                iv_hitbox3.setVisibility(View.GONE);
-                                score += 10;
-                                tv_score.setText("SCORE : " + score);
-                                tv_hit.setText("Good");
-                                comboCnt++;
-                                tv_combo.setText(comboCnt + " combo");
-
-                            } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 800 && iv_hitbox4.getVisibility() == View.VISIBLE) {
-
-                                //                               layout_play.getViewById(i).setVisibility(View.GONE);
-                                idList.add(((ImageView) msg.obj).getId());
-                                Log.d("아이디",((ImageView) msg.obj).getId()+"");
-                                layout_play.removeView((ImageView) msg.obj);
-                                iv_hitbox4.setVisibility(View.GONE);
-                                score += 10;
-                                tv_combo.setVisibility(View.VISIBLE);
-                                tv_score.setText("SCORE : " + score);
-                                tv_hit.setText("Good");
-                                comboCnt++;
-                                tv_combo.setText(comboCnt + " combo");
-
-
-                            }
-
-                    }//for
-                } else if (msg.what == 2) { // 노트 삭제
-
-                        if(idList.size()>0) {
-                            if (((ImageView) msg.obj).getId() == idList.get(idList.size()-1)) {
-                                tv_combo.setVisibility(View.INVISIBLE);
-                                tv_hit.setText("");
-
-
-                            } else {
-                                tv_hit.setText("Miss");
-                                comboCnt = 0;
-                                tv_combo.setText("");
-                                if(cnt>0){
-                                    cnt--;
-                                }
-                            }
+                            score += 10;
+                            tv_score.setText("SCORE : " + score);
+                            tv_hit.setText("Good");
+                            comboCnt++;
+                            tv_combo.setText(comboCnt + " combo");
+                        } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 560 && iv_hitbox3.getVisibility() == View.VISIBLE) {
+                            //                                layout_play.getViewById(i).setVisibility(View.GONE);
+                            layout_play.removeView((ImageView) msg.obj);
+                            iv_hitbox3.setVisibility(View.GONE);
+                            score += 10;
+                            tv_score.setText("SCORE : " + score);
+                            tv_hit.setText("Good");
+                            comboCnt++;
+                            tv_combo.setText(comboCnt + " combo");
+                        } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 800 && iv_hitbox4.getVisibility() == View.VISIBLE) {
+                            //                               layout_play.getViewById(i).setVisibility(View.GONE);
+                            layout_play.removeView((ImageView) msg.obj);
+                            iv_hitbox4.setVisibility(View.GONE);
+                            score += 10;
+                            tv_score.setText("SCORE : " + score);
+                            tv_hit.setText("Good");
+                            comboCnt++;
+                            tv_combo.setText(comboCnt + " combo");
+                        } else if (y > 1950) {
+                            tv_hit.setText("Miss");
+                            comboCnt = 0;
+                            tv_combo.setText("");
                         }
-                    bar.setProgress(cnt);
-                    if(bar.getProgress()==0){
-                        noteThread.interrupt();
-                        Toast.makeText(PlayActivity.this,"GAME OVER",Toast.LENGTH_SHORT).show();
                     }
-
+                } else if (msg.what == 2) { // 노트 삭제
                     layout_play.removeView((View) msg.obj);
+                } else if (msg.what == 3) { // 노트 생성
+                    ((ImageView) msg.obj).setLayoutParams(new ViewGroup.LayoutParams(NOTE_WIDTH, NOTE_HEIGHT));
+                    ((ImageView) msg.obj).setScaleType(ImageView.ScaleType.FIT_XY);
+                    ((ImageView) msg.obj).setVisibility(View.GONE);
+                    ((ImageView) msg.obj).setImageResource(R.drawable.note);
 
+                    layout_play.addView((ImageView) msg.obj);
+                    ((ImageView) msg.obj).setId(idValue);
+                    idValue++;
                 }
             }
         };
 
-        Beat[] beats = {
-                new Beat(1000, "1"),
-                new Beat(1000, "2"),
-                new Beat(1000, "3"),
-                new Beat(1000, "4"),
-        };
         noteThread.start();
-
-        for (int i = 0; i < beats.length; i++) {
-            Note note = new Note(beats[i].getNoteName(), testNote(), handler);
-            noteThread.noteAdd(note);
-        }
+        beatThread.start();
 
         btn_key1.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -192,8 +129,6 @@ public class PlayActivity extends Activity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox1.setVisibility(View.VISIBLE);
                     iv_backbox1.setVisibility(View.VISIBLE);
-                    Note note = new Note("1", testNote(), handler);
-                    noteThread.noteAdd(note);
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -211,8 +146,6 @@ public class PlayActivity extends Activity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox2.setVisibility(View.VISIBLE);
                     iv_backbox2.setVisibility(View.VISIBLE);
-                    Note note = new Note("2", testNote(), handler);
-                    noteThread.noteAdd(note);
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -230,8 +163,6 @@ public class PlayActivity extends Activity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox3.setVisibility(View.VISIBLE);
                     iv_backbox3.setVisibility(View.VISIBLE);
-                    Note note = new Note("3", testNote(), handler);
-                    noteThread.noteAdd(note);
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -248,8 +179,6 @@ public class PlayActivity extends Activity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox4.setVisibility(View.VISIBLE);
                     iv_backbox4.setVisibility(View.VISIBLE);
-                    Note note = new Note("4", testNote(), handler);
-                    noteThread.noteAdd(note);
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -260,5 +189,28 @@ public class PlayActivity extends Activity {
                 return false;
             }
         });
+    }
+
+    public void createNote(Beat beat) {
+        ImageView iv = new ImageView(PlayActivity.this);
+
+        float x = 0;
+        switch (beat.getNoteName()) {
+            case "1":
+                x = btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2);
+                break;
+            case "2":
+                x = btn_key2.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2);
+                break;
+            case "3":
+                x = btn_key3.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2);
+                break;
+            case "4":
+                x = btn_key4.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2);
+                break;
+        }
+
+        Note note = new Note(x, iv, handler);
+        noteThread.noteAdd(note);
     }
 }
