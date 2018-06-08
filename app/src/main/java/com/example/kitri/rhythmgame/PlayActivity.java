@@ -22,6 +22,8 @@ public class PlayActivity extends Activity {
     private int score = 0;
     private int comboCnt = 0;
 
+    private final int NOTE_WIDTH = 200, NOTE_HEIGHT = 30;
+
     NoteThread noteThread = new NoteThread();
     BeatThread beatThread = new BeatThread(this);
 
@@ -69,22 +71,17 @@ public class PlayActivity extends Activity {
                             tv_hit.setText("Good");
                             comboCnt++;
                             tv_combo.setText(comboCnt + " combo");
-
                         } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 320 && iv_hitbox2.getVisibility() == View.VISIBLE) {
-
                             //                                layout_play.getViewById(i).setVisibility(View.GONE);
                             layout_play.removeView((ImageView) msg.obj);
                             iv_hitbox2.setVisibility(View.GONE);
-
 
                             score += 10;
                             tv_score.setText("SCORE : " + score);
                             tv_hit.setText("Good");
                             comboCnt++;
                             tv_combo.setText(comboCnt + " combo");
-
                         } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 560 && iv_hitbox3.getVisibility() == View.VISIBLE) {
-
                             //                                layout_play.getViewById(i).setVisibility(View.GONE);
                             layout_play.removeView((ImageView) msg.obj);
                             iv_hitbox3.setVisibility(View.GONE);
@@ -93,9 +90,7 @@ public class PlayActivity extends Activity {
                             tv_hit.setText("Good");
                             comboCnt++;
                             tv_combo.setText(comboCnt + " combo");
-
                         } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 800 && iv_hitbox4.getVisibility() == View.VISIBLE) {
-
                             //                               layout_play.getViewById(i).setVisibility(View.GONE);
                             layout_play.removeView((ImageView) msg.obj);
                             iv_hitbox4.setVisibility(View.GONE);
@@ -113,7 +108,7 @@ public class PlayActivity extends Activity {
                 } else if (msg.what == 2) { // 노트 삭제
                     layout_play.removeView((View) msg.obj);
                 } else if (msg.what == 3) { // 노트 생성
-                    ((ImageView) msg.obj).setLayoutParams(new ViewGroup.LayoutParams(200, 30));
+                    ((ImageView) msg.obj).setLayoutParams(new ViewGroup.LayoutParams(NOTE_WIDTH, NOTE_HEIGHT));
                     ((ImageView) msg.obj).setScaleType(ImageView.ScaleType.FIT_XY);
                     ((ImageView) msg.obj).setVisibility(View.GONE);
                     ((ImageView) msg.obj).setImageResource(R.drawable.note);
@@ -125,19 +120,8 @@ public class PlayActivity extends Activity {
             }
         };
 
-//        Beat[] beats = {
-//                new Beat(1000, "1"),
-//                new Beat(1000, "2"),
-//                new Beat(1000, "3"),
-//                new Beat(1000, "4"),
-//        };
         noteThread.start();
         beatThread.start();
-
-//        for (int i = 0; i < beats.length; i++) {
-//            Note note = new Note(beats[i].getNoteName(), createNoteImage(), handler);
-//            noteThread.noteAdd(note);
-//        }
 
         btn_key1.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -210,7 +194,23 @@ public class PlayActivity extends Activity {
     public void createNote(Beat beat) {
         ImageView iv = new ImageView(PlayActivity.this);
 
-        Note note = new Note(beat.getNoteName(), iv, handler);
+        float x = 0;
+        switch (beat.getNoteName()) {
+            case "1":
+                x = btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2);
+                break;
+            case "2":
+                x = btn_key2.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2);
+                break;
+            case "3":
+                x = btn_key3.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2);
+                break;
+            case "4":
+                x = btn_key4.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2);
+                break;
+        }
+
+        Note note = new Note(x, iv, handler);
         noteThread.noteAdd(note);
     }
 }

@@ -12,21 +12,8 @@ public class Note {
     private Handler handler;
     private boolean dead = false;
 
-    public Note(String noteType, ImageView iv, Handler handler) {
-        switch (noteType) {
-            case "1":
-                x = 70;
-                break;
-            case "2":
-                x = 320;
-                break;
-            case "3":
-                x = 560;
-                break;
-            case "4":
-                x = 800;
-                break;
-        }
+    public Note(float x, ImageView iv, Handler handler) {
+        this.x = (int) x;
         this.iv = iv;
         this.handler = handler;
 
@@ -36,6 +23,7 @@ public class Note {
         handler.sendMessage(msg);
     }
 
+    // 노트 떨어짐
     public void drop() {
         Message msg = new Message();
         msg.what = 1; // 1:노트 움직이기
@@ -52,6 +40,7 @@ public class Note {
         }
     }
 
+    // 노트 삭제
     public void delete() {
         Message msg = new Message();
         msg.what = 2; // 2:삭제
