@@ -27,8 +27,6 @@ public class PlayActivity extends Activity {
     public ImageView testNote() {
         ImageView iv = new ImageView(PlayActivity.this);
         iv.setImageResource(R.drawable.note);
-        iv.setPivotX(75);
-        iv.setPivotY(15);
         iv.setLayoutParams(new ViewGroup.LayoutParams(200, 30));
         iv.setScaleType(ImageView.ScaleType.FIT_XY);
         iv.setVisibility(View.GONE);
@@ -60,8 +58,6 @@ public class PlayActivity extends Activity {
         iv_backbox2=findViewById(R.id.iv_backbox2);
         iv_backbox3=findViewById(R.id.iv_backbox3);
         iv_backbox4=findViewById(R.id.iv_backbox4);
-
-
 
         tv_combo = findViewById(R.id.tv_combo);
         tv_hit = findViewById(R.id.tv_hit);
