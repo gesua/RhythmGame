@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_play"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:id="@+id/iv_note"
+        android:layout_width="60dp"
+        android:layout_height="15dp"
+        android:background="#0055ff"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_key1"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20sp"
+        android:text="key1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btn_key2" />
+
+    <Button
+        android:id="@+id/btn_key2"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="key2"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_key1"
+        app:layout_constraintRight_toLeftOf="@id/btn_key3" />
+
+    <Button
+        android:id="@+id/btn_key3"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:text="key3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_key2"
+        app:layout_constraintRight_toLeftOf="@id/btn_key4" />
+
+    <Button
+        android:id="@+id/btn_key4"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="20dp"
+        android:text="key4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/btn_key3"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:background="#50ff888a"
+        app:layout_constraintBottom_toBottomOf="@id/loca"
+        app:layout_constraintLeft_toLeftOf="@id/btn_key1"
+        app:layout_constraintRight_toRightOf="@id/btn_key4"
+        app:layout_constraintTop_toTopOf="@id/loca" />
+
+    <ImageView
+        android:id="@+id/loca"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/btn_key1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/btn_key1" />
+
+    <ImageView
+        android:id="@+id/iv_hitbox1"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btn_key1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/btn_key1" />
+
+    <ImageView
+        android:id="@+id/iv_hitbox2"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btn_key1"
+        app:layout_constraintLeft_toLeftOf="@id/btn_key2"
+        app:layout_constraintRight_toRightOf="@id/btn_key2" />
+
+    <ImageView
+        android:id="@+id/iv_hitbox3"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btn_key1"
+        app:layout_constraintLeft_toLeftOf="@id/btn_key3"
+        app:layout_constraintRight_toRightOf="@id/btn_key3" />
+
+    <ImageView
+        android:id="@+id/iv_hitbox4"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20sp"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btn_key1"
+        app:layout_constraintLeft_toLeftOf="@id/btn_key4"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_setting"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_margin="10dp"
+        android:text="SCORE : 999999999999999"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/iv_setting"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_1"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="15dp"
+        android:layout_marginRight="20sp"
+        android:progress="100"
+        app:layout_constraintLeft_toLeftOf="@id/tv_score"
+        app:layout_constraintRight_toLeftOf="@id/iv_setting"
+        app:layout_constraintTop_toBottomOf="@id/tv_score" />
+
+</android.support.constraint.ConstraintLayout>
