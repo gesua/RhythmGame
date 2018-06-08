@@ -20,13 +20,20 @@ public class BeatThread extends Thread {
     }
 
     public void startMusic(Activity context) {
-        music = MediaPlayer.create(context, R.raw.kalimba);
+        music = MediaPlayer.create(context, R.raw.romance);
         music.start();
     }
 
     @Override
     public void run() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         startTime = System.currentTimeMillis();
+        startMusic(context);
 
         for (int i = 0; i < beats.length; i++) {
             while (true) {
