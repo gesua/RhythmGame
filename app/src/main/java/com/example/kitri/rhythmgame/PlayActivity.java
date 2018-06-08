@@ -10,17 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class PlayActivity extends Activity {
     private ConstraintLayout layout_play;
     private Button btn_key1, btn_key2, btn_key3, btn_key4;
-    private ImageView iv_hitbox1, iv_hitbox2, iv_hitbox3, iv_hitbox4,loca;
-    private TextView tv_combo,tv_hit,tv_score;
+    private ImageView iv_hitbox1, iv_hitbox2, iv_hitbox3, iv_hitbox4;
     private Handler handler;
-    private int idValue=0;
-    private int score=0;
-    private int comboCnt=0;
+
     NoteThread noteThread = new NoteThread();
 
     public ImageView testNote() {
@@ -28,11 +24,9 @@ public class PlayActivity extends Activity {
         iv.setImageResource(R.drawable.note);
         iv.setPivotX(75);
         iv.setPivotY(15);
-        iv.setLayoutParams(new ViewGroup.LayoutParams(210, 40));
+        iv.setLayoutParams(new ViewGroup.LayoutParams(150, 30));
         iv.setScaleType(ImageView.ScaleType.FIT_XY);
         iv.setVisibility(View.GONE);
-        iv.setId(idValue);
-        idValue++;
         layout_play.addView(iv);
 
         return iv;
@@ -54,71 +48,13 @@ public class PlayActivity extends Activity {
         iv_hitbox2 = findViewById(R.id.iv_hitbox2);
         iv_hitbox3 = findViewById(R.id.iv_hitbox3);
         iv_hitbox4 = findViewById(R.id.iv_hitbox4);
-        loca=findViewById(R.id.loca);
-
-        tv_combo=findViewById(R.id.tv_combo);
-        tv_hit=findViewById(R.id.tv_hit);
-        tv_score=findViewById(R.id.tv_score);
 
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) { // 노트 밑으로 움직임
-
                     ((ImageView) msg.obj).setX(msg.arg1);
                     ((ImageView) msg.obj).setY(msg.arg2);
-
-                    Float y= ((ImageView) msg.obj).getY();
-                    for(int i=0; i<idValue; i++) {
-                        if (y > loca.getTop() + -30 && y < loca.getBottom() + 30 &&  ((ImageView) msg.obj).getX() == 70 && iv_hitbox1.getVisibility() == View.VISIBLE) {
-
-
-                            layout_play.removeView((ImageView) msg.obj);
-                            iv_hitbox1.setVisibility(View.GONE);
-
-                            score += 10;
-                            tv_score.setText("SCORE : " + score);
-                            tv_hit.setText("Good");
-                            comboCnt++;
-                            tv_combo.setText(comboCnt + " combo");
-
-                        }else if (y > loca.getTop() -30 && y < loca.getBottom() + 30 &&  ((ImageView) msg.obj).getX() == 320 && iv_hitbox2.getVisibility() == View.VISIBLE) {
-
-//                                layout_play.getViewById(i).setVisibility(View.GONE);
-                            layout_play.removeView((ImageView) msg.obj);
-                            iv_hitbox2.setVisibility(View.GONE);
-
-
-                            score += 10;
-                            tv_score.setText("SCORE : " + score);
-                            tv_hit.setText("Good");
-                            comboCnt++;
-                            tv_combo.setText(comboCnt + " combo");
-
-                        }else if (y > loca.getTop() -30 && y < loca.getBottom() + 30 &&  ((ImageView) msg.obj).getX() == 560 && iv_hitbox3.getVisibility() == View.VISIBLE) {
-
-//                                layout_play.getViewById(i).setVisibility(View.GONE);
-                            layout_play.removeView((ImageView) msg.obj);
-                            iv_hitbox3.setVisibility(View.GONE);
-                            score += 10;
-                            tv_score.setText("SCORE : " + score);
-                            tv_hit.setText("Good");
-                            comboCnt++;
-                            tv_combo.setText(comboCnt + " combo");
-
-                        }else if (y > loca.getTop() -30 && y < loca.getBottom() + 30 &&  ((ImageView) msg.obj).getX() == 800 && iv_hitbox4.getVisibility() == View.VISIBLE) {
-
-//                                layout_play.getViewById(i).setVisibility(View.GONE);
-                            layout_play.removeView((ImageView) msg.obj);
-                            iv_hitbox4.setVisibility(View.GONE);
-                            score += 10;
-                            tv_score.setText("SCORE : " + score);
-                            tv_hit.setText("Good");
-                            comboCnt++;
-                            tv_combo.setText(comboCnt + " combo");
-
-                        }
-                    }
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
                 } else if (msg.what == 2) { // 노트 삭제
                     layout_play.removeView((View) msg.obj);
@@ -131,7 +67,6 @@ public class PlayActivity extends Activity {
                 new Beat(1000, "2"),
                 new Beat(1000, "3"),
                 new Beat(1000, "4"),
-
         };
         noteThread.start();
 
