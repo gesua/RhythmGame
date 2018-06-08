@@ -2,6 +2,7 @@ package com.example.kitri.rhythmgame;
 
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.ImageView;
 
 public class Note {
@@ -11,6 +12,7 @@ public class Note {
     private ImageView iv;
     private Handler handler;
     private boolean dead = false;
+
 
     public Note(String noteType, ImageView iv, Handler handler) {
         switch (noteType) {
@@ -27,6 +29,7 @@ public class Note {
                 x = 800;
                 break;
         }
+        if(iv.getY()<1950)
         this.iv = iv;
         this.handler = handler;
     }
@@ -37,12 +40,15 @@ public class Note {
         msg.obj = iv;
         msg.arg1 = x;
         msg.arg2 = y;
+
         handler.sendMessage(msg);
 
         y += NOTE_SPEED;
 
 
+
         if (y >= 2000) {
+
             delete();
         }
     }

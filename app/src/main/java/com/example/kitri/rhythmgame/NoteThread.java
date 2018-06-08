@@ -1,5 +1,7 @@
 package com.example.kitri.rhythmgame;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class NoteThread extends Thread {
@@ -18,7 +20,10 @@ public class NoteThread extends Thread {
                     if (noteList.get(i).isDead()) {
                         noteList.remove(i);
                     } else {
+
+
                         noteList.get(i).drop();
+
                     }
                 }
                 Thread.sleep(SLEEP_TIME);
