@@ -5,7 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class NoteThread extends Thread {
-    private final int SLEEP_TIME = 1;
+    private final int SLEEP_TIME = 16;
     private ArrayList<Note> noteList = new ArrayList<>();
 
     public void noteAdd(Note note) {
