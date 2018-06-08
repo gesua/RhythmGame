@@ -29,6 +29,11 @@ public class Note {
         }
         this.iv = iv;
         this.handler = handler;
+
+        Message msg = new Message();
+        msg.what = 3; // 3:노트 생성
+        msg.obj = iv;
+        handler.sendMessage(msg);
     }
 
     public void drop() {
