@@ -57,7 +57,7 @@
 
     <ImageView
         android:layout_width="0dp"
-        android:layout_height="10dp"
+        android:layout_height="11dp"
         android:background="#50ff888a"
         app:layout_constraintBottom_toBottomOf="@id/loca"
         app:layout_constraintLeft_toLeftOf="@id/btn_key1"

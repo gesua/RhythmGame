@@ -5,7 +5,7 @@ import android.os.Message;
 import android.widget.ImageView;
 
 public class Note {
-    private final int NOTE_SPEED = 3;
+    private final int NOTE_SPEED = 20;
 
     private int x, y = 150;
     private ImageView iv;

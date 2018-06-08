@@ -176,6 +176,10 @@ public class BeatThread extends Thread {
         music.start();
     }
 
+    public void stopMusic(){
+        music.stop();
+    }
+
     @Override
     public void run() {
         try {
