@@ -205,7 +205,7 @@ public class PlayActivity extends Activity {
                     iv_backbox3.setVisibility(View.INVISIBLE);
                     iv_hitbox3.setVisibility(View.GONE);
                 }
-
+//ds
                 return false;
             }
         });
