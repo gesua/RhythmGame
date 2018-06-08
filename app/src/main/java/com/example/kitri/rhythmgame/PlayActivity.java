@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class PlayActivity extends Activity {
     private ConstraintLayout layout_play;
     private Button btn_key1, btn_key2, btn_key3, btn_key4;
-    private ImageView iv_hitbox1, iv_hitbox2, iv_hitbox3, iv_hitbox4, loca;
+    private ImageView iv_hitbox1, iv_hitbox2, iv_hitbox3, iv_hitbox4, loca,iv_backbox1,iv_backbox2,iv_backbox3,iv_backbox4;
     private TextView tv_combo, tv_hit, tv_score;
     private Handler handler;
     private int idValue = 0;
@@ -56,6 +56,12 @@ public class PlayActivity extends Activity {
         iv_hitbox3 = findViewById(R.id.iv_hitbox3);
         iv_hitbox4 = findViewById(R.id.iv_hitbox4);
         loca = findViewById(R.id.loca);
+        iv_backbox1=findViewById(R.id.iv_backbox1);
+        iv_backbox2=findViewById(R.id.iv_backbox2);
+        iv_backbox3=findViewById(R.id.iv_backbox3);
+        iv_backbox4=findViewById(R.id.iv_backbox4);
+
+
 
         tv_combo = findViewById(R.id.tv_combo);
         tv_hit = findViewById(R.id.tv_hit);
@@ -71,7 +77,7 @@ public class PlayActivity extends Activity {
                     Float y = ((ImageView) msg.obj).getY();
                     for (int i = 0; i < idValue; i++) {
                         if (y > loca.getTop() + -30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == 70 && iv_hitbox1.getVisibility() == View.VISIBLE) {
-                            layout_play.removeView((ImageView) msg.obj);
+                                                                layout_play.removeView((ImageView) msg.obj);
                             iv_hitbox1.setVisibility(View.GONE);
 
                             score += 10;
@@ -115,10 +121,17 @@ public class PlayActivity extends Activity {
                             comboCnt++;
                             tv_combo.setText(comboCnt + " combo");
 
+
+                        }else if(y>1950){
+                            tv_hit.setText("Miss");
+                            comboCnt=0;
+                            tv_combo.setText("");
                         }
                     }
                 } else if (msg.what == 2) { // 노트 삭제
+
                     layout_play.removeView((View) msg.obj);
+
                 }
             }
         };
@@ -141,12 +154,13 @@ public class PlayActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox1.setVisibility(View.VISIBLE);
-
+                    iv_backbox1.setVisibility(View.VISIBLE);
                     Note note = new Note("1", testNote(), handler);
                     noteThread.noteAdd(note);
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
+                    iv_backbox1.setVisibility(View.INVISIBLE);
                     iv_hitbox1.setVisibility(View.GONE);
                 }
 
@@ -159,12 +173,13 @@ public class PlayActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox2.setVisibility(View.VISIBLE);
-
+                    iv_backbox2.setVisibility(View.VISIBLE);
                     Note note = new Note("2", testNote(), handler);
                     noteThread.noteAdd(note);
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
+                    iv_backbox2.setVisibility(View.INVISIBLE);
                     iv_hitbox2.setVisibility(View.GONE);
                 }
 
@@ -177,12 +192,13 @@ public class PlayActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox3.setVisibility(View.VISIBLE);
-
+                    iv_backbox3.setVisibility(View.VISIBLE);
                     Note note = new Note("3", testNote(), handler);
                     noteThread.noteAdd(note);
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
+                    iv_backbox3.setVisibility(View.INVISIBLE);
                     iv_hitbox3.setVisibility(View.GONE);
                 }
 
@@ -194,13 +210,14 @@ public class PlayActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox4.setVisibility(View.VISIBLE);
-
+                    iv_backbox4.setVisibility(View.VISIBLE);
                     Note note = new Note("4", testNote(), handler);
                     noteThread.noteAdd(note);
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     iv_hitbox4.setVisibility(View.GONE);
+                    iv_backbox4.setVisibility(View.INVISIBLE);
                 }
 
                 return false;
