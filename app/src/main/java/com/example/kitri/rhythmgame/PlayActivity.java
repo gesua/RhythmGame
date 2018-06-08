@@ -215,9 +215,11 @@ public class PlayActivity extends Activity {
         btn_key4.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_hitbox4.setVisibility(View.VISIBLE);
                     iv_backbox4.setVisibility(View.VISIBLE);
+
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -228,6 +230,8 @@ public class PlayActivity extends Activity {
                 return false;
             }
         });
+
+
     }
 
     public void createNote(Beat beat) {
