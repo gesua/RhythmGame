@@ -18,13 +18,13 @@ public class Note {
                 x = 70;
                 break;
             case "2":
-                x = 310;
+                x = 320;
                 break;
             case "3":
-                x = 550;
+                x = 560;
                 break;
             case "4":
-                x = 790;
+                x = 800;
                 break;
         }
         this.iv = iv;
@@ -41,7 +41,8 @@ public class Note {
 
         y += NOTE_SPEED;
 
-        if (y >= 1300) {
+
+        if (y >= 2000) {
             delete();
         }
     }
