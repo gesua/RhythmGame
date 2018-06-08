@@ -64,6 +64,8 @@ public class PlayActivity extends Activity {
         tv_hit = findViewById(R.id.tv_hit);
         tv_score = findViewById(R.id.tv_score);
 
+        tv_score.setText("SCORE : 0");
+
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -74,7 +76,7 @@ public class PlayActivity extends Activity {
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
                     Float y = ((ImageView) msg.obj).getY();
                     for (int i = 0; i < 10; i++) {
-                        if (y > loca.getTop() + -30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && iv_hitbox1.getVisibility() == View.VISIBLE) {
+                        if (y > loca.getTop() + -300 && y < loca.getBottom() + 300 && ((ImageView) msg.obj).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && iv_hitbox1.getVisibility() == View.VISIBLE) {
                             layout_play.removeView((ImageView) msg.obj);
                             iv_hitbox1.setVisibility(View.GONE);
 
@@ -83,7 +85,7 @@ public class PlayActivity extends Activity {
                             tv_hit.setText("Good");
                             comboCnt++;
                             tv_combo.setText(comboCnt + " combo");
-                        } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && iv_hitbox2.getVisibility() == View.VISIBLE) {
+                        } else if (y > loca.getTop() - 300 && y < loca.getBottom() + 300 && ((ImageView) msg.obj).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && iv_hitbox2.getVisibility() == View.VISIBLE) {
                             //                                layout_play.getViewById(i).setVisibility(View.GONE);
                             layout_play.removeView((ImageView) msg.obj);
                             iv_hitbox2.setVisibility(View.GONE);
@@ -93,7 +95,7 @@ public class PlayActivity extends Activity {
                             tv_hit.setText("Good");
                             comboCnt++;
                             tv_combo.setText(comboCnt + " combo");
-                        } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && iv_hitbox3.getVisibility() == View.VISIBLE) {
+                        } else if (y > loca.getTop() - 300 && y < loca.getBottom() + 300 && ((ImageView) msg.obj).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && iv_hitbox3.getVisibility() == View.VISIBLE) {
                             //                                layout_play.getViewById(i).setVisibility(View.GONE);
                             layout_play.removeView((ImageView) msg.obj);
                             iv_hitbox3.setVisibility(View.GONE);
@@ -102,7 +104,7 @@ public class PlayActivity extends Activity {
                             tv_hit.setText("Good");
                             comboCnt++;
                             tv_combo.setText(comboCnt + " combo");
-                        } else if (y > loca.getTop() - 30 && y < loca.getBottom() + 30 && ((ImageView) msg.obj).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && iv_hitbox4.getVisibility() == View.VISIBLE) {
+                        } else if (y > loca.getTop() - 300 && y < loca.getBottom() + 300 && ((ImageView) msg.obj).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && iv_hitbox4.getVisibility() == View.VISIBLE) {
                             //                               layout_play.getViewById(i).setVisibility(View.GONE);
                             layout_play.removeView((ImageView) msg.obj);
                             iv_hitbox4.setVisibility(View.GONE);
@@ -124,18 +126,19 @@ public class PlayActivity extends Activity {
                             tv_hit.setText("Miss");
                             comboCnt = 0;
                             tv_combo.setText("");
-                            if(cnt>0){
+                            if (cnt > 0) {
                                 cnt--;
                             }
                         }
-                    }else{
-                        tv_hit.setText("Miss");
-                        comboCnt = 0;
-                        tv_combo.setText("");
-                        if(cnt>0){
-                            cnt--;
-                        }
                     }
+//                    }else{
+//                        tv_hit.setText("Miss");
+//                        comboCnt = 0;
+//                        tv_combo.setText("");
+//                        if(cnt>0){
+//                            cnt--;
+//                        }
+//                    }
                     bar.setProgress(cnt);
                     if(bar.getProgress()==0){
                         noteThread.interrupt();
@@ -250,6 +253,10 @@ public class PlayActivity extends Activity {
         noteThread.noteAdd(note);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        beatThread.stopMusic();
+        super.onDestroy();
+    }
 }
 
