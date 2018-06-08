@@ -34,7 +34,6 @@ public class Note {
 
         y += NOTE_SPEED;
 
-
         if (y >= 2000) {
             delete();
         }
