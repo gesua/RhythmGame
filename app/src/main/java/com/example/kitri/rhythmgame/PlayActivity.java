@@ -172,7 +172,6 @@ public class PlayActivity extends Activity {
                             float y = layout_play.getViewById(i).getY();
                             y += 25; //노트스피드 기본 25 최소5 최대 50
                             layout_play.getViewById(i).setY(y);
-                            Log.d("아래",layout_play.getViewById(i).getTop()+"+++++"+layout_play.getViewById(i).getBottom()+"----"+layout_play.getViewById(i).getId());
                             if (y < btn_key1.getBottom() + 200) {
                                 if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
 
@@ -194,6 +193,7 @@ public class PlayActivity extends Activity {
                                         com++;
                                         combo.setText(com + " combo");
                                     }
+                                    layout_play.getViewById(i).setY(y+500);
 
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
                                     hit2 = false;
@@ -216,6 +216,7 @@ public class PlayActivity extends Activity {
                                         com++;
                                         combo.setText(com + " combo");
                                     }
+                                    layout_play.getViewById(i).setY(y+500);
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
@@ -236,6 +237,7 @@ public class PlayActivity extends Activity {
                                         com++;
                                         combo.setText(com + " combo");
                                     }
+                                    layout_play.getViewById(i).setY(y+500);
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
                                     hit4 = false;
                                     deldteNoteCnt++;
@@ -256,6 +258,7 @@ public class PlayActivity extends Activity {
                                         combo.setText(com + " combo");
 
                                     }
+                                    layout_play.getViewById(i).setY(y+500); //판정되면 바로 밑으로 내려가버리게
                                 } else {
                                     layout_play.getViewById(i).setY(y);
                                 }
@@ -284,7 +287,7 @@ public class PlayActivity extends Activity {
 
                         }
                     }
-                    hit1=false;
+                    hit1=false; //누르고있을때 판정되는거 막기
                     hit2=false;
                     hit3=false;
                     hit4=false;
