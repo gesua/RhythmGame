@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayActivity extends Activity {
+    private int NOTE_WIDTH = 200, NOTE_HEIGHT = 30;
+
     private ConstraintLayout layout_play;
     private Button btn_key1, btn_key2, btn_key3, btn_key4;
     private ImageView iv_backbox1, iv_backbox2, iv_backbox3, iv_backbox4, loca;
@@ -31,20 +33,19 @@ public class PlayActivity extends Activity {
     private int com = 0;
     private int goodcnt = 0;
     private int misscnt = 0;
-    private int maxcom=0;
+    private int maxcom = 0;
     private ProgressBar bar;
     private Down down;
     private Note note;
     private AlertDialog.Builder alertDialog;
     private AlertDialog dialog;
-    private boolean hit1=false;
-    private boolean hit2=false;
-    private boolean hit3=false;
-    private boolean hit4=false;
-    private String mm="";
+    private boolean hit1 = false;
+    private boolean hit2 = false;
+    private boolean hit3 = false;
+    private boolean hit4 = false;
+    private String mm = "";
     private static MediaPlayer mp;
     private List<NoteVO> noteVOS = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,9 +79,7 @@ public class PlayActivity extends Activity {
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-
-
-                if(msg.what==777){
+                if (msg.what == 777) {
 
                     try {
                         mp.prepare();
@@ -90,6 +89,7 @@ public class PlayActivity extends Activity {
                     mp.start();
                 }
                 if (msg.what == 1) {
+
                     ((ImageView) msg.obj).setX(btn_key1.getLeft());
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
@@ -111,8 +111,8 @@ public class PlayActivity extends Activity {
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
 
                 } else if (msg.what == 5) {
-                    if(misscnt==0){
-                        mm="Full Combo";
+                    if (misscnt == 0) {
+                        mm = "Full Combo";
                     }
                     if (!PlayActivity.this.isFinishing()) { //액티비티가 살아있는지 체크
                         alertDialog = new AlertDialog.Builder(PlayActivity.this);
@@ -132,7 +132,7 @@ public class PlayActivity extends Activity {
                                     public void onClick(DialogInterface dialog, int which) {
 
                                         Intent intent = new Intent(getApplicationContext(), PlayActivity.class);
-                                         startActivity(intent);
+                                        startActivity(intent);
 
                                         dialog.cancel();
                                         finish();
@@ -149,13 +149,13 @@ public class PlayActivity extends Activity {
 
                         if (layout_play.getViewById(i) != null) {
                             float y = layout_play.getViewById(i).getY();
-                            if (y < btn_key1.getTop()+150) {
-                                y +=15
+                            if (y < btn_key1.getTop() + 150) {
+                                y += 15
                                 ; //노트스피드
                                 layout_play.getViewById(i).setY(y);
                                 if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == btn_key1.getLeft() && hit1) {
 
-                                    hit1=false;
+                                    hit1 = false;
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     goodcnt++;
@@ -166,7 +166,7 @@ public class PlayActivity extends Activity {
                                     combo.setText(com + " combo");
 
                                 } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == btn_key2.getLeft() && hit2) {
-                                    hit2=false;
+                                    hit2 = false;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
 
                                     goodcnt++;
@@ -179,7 +179,7 @@ public class PlayActivity extends Activity {
                                 } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == btn_key3.getLeft() && hit3) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-                                    hit3=false;
+                                    hit3 = false;
 
                                     goodcnt++;
                                     score2 += 10;
@@ -191,7 +191,7 @@ public class PlayActivity extends Activity {
                                 } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == btn_key4.getLeft() && hit4) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-                                    hit4=false;
+                                    hit4 = false;
                                     goodcnt++;
                                     score2 += 10;
                                     tv_score.setText("SCORE : " + score2);
@@ -227,8 +227,8 @@ public class PlayActivity extends Activity {
                         }
                     }
                 } //msg.999 end
-                if(maxcom<com){
-                    maxcom=com;
+                if (maxcom < com) {
+                    maxcom = com;
                 }
 
             }
@@ -238,17 +238,15 @@ public class PlayActivity extends Activity {
 
         mp.setLooping(true);
 
-        MusicThead musicThead=new MusicThead(handler);
+        MusicThead musicThead = new MusicThead(handler);
         musicThead.start();
-
-
-
-
 
 
         for (int i = 0; i < noteVOS.size(); i++) {
             ImageView iv = new ImageView(PlayActivity.this);
             iv.setImageResource(R.drawable.note);
+            iv.setLayoutParams(new ViewGroup.LayoutParams(NOTE_WIDTH, NOTE_HEIGHT));
+            iv.setScaleType(ImageView.ScaleType.FIT_XY);
             iv.setVisibility(View.GONE);
             iv.setId(i);
             layout_play.addView(iv);
@@ -266,14 +264,14 @@ public class PlayActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_backbox1.setVisibility(View.VISIBLE);
-                   hit1=true;
+                    hit1 = true;
 
 
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     iv_backbox1.setVisibility(View.GONE);
-                    hit1=false;
+                    hit1 = false;
 
                 }
 
@@ -286,14 +284,14 @@ public class PlayActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_backbox2.setVisibility(View.VISIBLE);
-                    hit2=true;
+                    hit2 = true;
 
 
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     iv_backbox2.setVisibility(View.GONE);
-                    hit2=false;
+                    hit2 = false;
                 }
 
                 return false;
@@ -305,14 +303,14 @@ public class PlayActivity extends Activity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_backbox3.setVisibility(View.VISIBLE);
-                    hit3=true;
+                    hit3 = true;
 
 
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     iv_backbox3.setVisibility(View.GONE);
-                    hit3=false;
+                    hit3 = false;
                 }
 
                 return false;
@@ -324,13 +322,13 @@ public class PlayActivity extends Activity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     iv_backbox4.setVisibility(View.VISIBLE);
 
-                    hit4=true;
+                    hit4 = true;
 
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     iv_backbox4.setVisibility(View.GONE);
-                    hit4=false;
+                    hit4 = false;
                 }
 
                 return false;
@@ -360,7 +358,6 @@ public class PlayActivity extends Activity {
         mp.pause();
 
 
-
         final AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("설정")
@@ -378,7 +375,7 @@ public class PlayActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
 
 
-                      dialog.cancel();
+                        dialog.cancel();
                     }
                 })
                 .show();
