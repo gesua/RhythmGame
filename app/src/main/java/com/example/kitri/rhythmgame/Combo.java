@@ -5,14 +5,10 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class Combo {
-    private static Combo instance;
     private ImageView[] iv_combo = new ImageView[3];
     private int[] numImage = new int[10];
 
-    private Combo() {
-    }
-
-    private Combo(Activity context) {
+    public Combo(Activity context) {
         iv_combo[0] = context.findViewById(R.id.tv_combo_1);
         iv_combo[1] = context.findViewById(R.id.tv_combo_2);
         iv_combo[2] = context.findViewById(R.id.tv_combo_3);
@@ -27,13 +23,6 @@ public class Combo {
         numImage[7] = R.drawable.num_7;
         numImage[8] = R.drawable.num_8;
         numImage[9] = R.drawable.num_9;
-    }
-
-    public static Combo getInstance(Activity context) {
-        if (instance == null) {
-            instance = new Combo(context);
-        }
-        return instance;
     }
 
     public void setCombo(int combo) {

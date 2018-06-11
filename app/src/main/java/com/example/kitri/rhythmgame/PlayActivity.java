@@ -71,7 +71,7 @@ public class PlayActivity extends Activity {
 
         loca = findViewById(R.id.loca);
         bar = findViewById(R.id.progress_1);
-        combo = Combo.getInstance(this);
+        combo = new Combo(this);
 
         iv_hit = findViewById(R.id.iv_hit);
         tv_score = findViewById(R.id.tv_score);
