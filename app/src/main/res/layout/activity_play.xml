@@ -18,13 +18,13 @@
 
     <Button
         android:id="@+id/btn_key1"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginLeft="20sp"
-        android:text="key1"
+        android:background="@drawable/button_img"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/btn_key2" />
+        app:layout_constraintRight_toLeftOf="@+id/btn_key2" />
 
     <Button
         android:id="@+id/btn_key2"
@@ -75,11 +75,11 @@
 
     <ImageView
         android:id="@+id/iv_hitbox1"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
-        android:background="#00000000"
+        android:background="@drawable/button_effect"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btn_key1"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -87,10 +87,10 @@
 
     <ImageView
         android:id="@+id/iv_hitbox2"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="20dp"
-        android:background="#00000000"
+        android:background="@drawable/button_effect"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btn_key1"
         app:layout_constraintLeft_toLeftOf="@+id/btn_key2"
@@ -98,10 +98,10 @@
 
     <ImageView
         android:id="@+id/iv_hitbox3"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="20dp"
-        android:background="#00000000"
+        android:background="@drawable/button_effect"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btn_key1"
         app:layout_constraintLeft_toLeftOf="@+id/btn_key3"
@@ -109,67 +109,17 @@
 
     <ImageView
         android:id="@+id/iv_hitbox4"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="20sp"
-        android:background="#00000000"
+        android:background="@drawable/button_effect"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/btn_key1"
         app:layout_constraintLeft_toLeftOf="@+id/btn_key4"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <ImageView
-        android:id="@+id/iv_backbox1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="0.5"
-        android:scaleType="fitXY"
-        android:src="@drawable/button_effect"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key1"
-        app:layout_constraintLeft_toLeftOf="@+id/btn_key1"
-        app:layout_constraintRight_toRightOf="@+id/btn_key1"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/iv_backbox2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="0.5"
-        android:scaleType="fitXY"
-        android:src="@drawable/button_effect"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key2"
-        app:layout_constraintLeft_toLeftOf="@+id/btn_key2"
-        app:layout_constraintRight_toRightOf="@+id/btn_key2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_backbox3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="0.5"
-        android:scaleType="fitXY"
-        android:src="@drawable/button_effect"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key3"
-        app:layout_constraintLeft_toLeftOf="@+id/btn_key3"
-        app:layout_constraintRight_toRightOf="@+id/btn_key3"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_backbox4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="0.5"
-        android:scaleType="fitXY"
-        android:src="@drawable/button_effect"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key4"
-        app:layout_constraintLeft_toLeftOf="@+id/btn_key4"
-        app:layout_constraintRight_toRightOf="@+id/btn_key4"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_setting"

@@ -153,7 +153,7 @@ public class PlayActivity extends Activity {
                                 y += 10
                                 ; //노트스피드
                                 layout_play.getViewById(i).setY(y);
-                                if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == btn_key1.getLeft() && hit1) {
+                                if (y > loca.getTop() - 50 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == btn_key1.getLeft() && hit1) {
 
                                     hit1=false;
 
@@ -165,7 +165,7 @@ public class PlayActivity extends Activity {
                                     com++;
                                     combo.setText(com + " combo");
 
-                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == btn_key2.getLeft() && hit2) {
+                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == btn_key2.getLeft() && hit2) {
                                     hit2=false;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
 
@@ -176,7 +176,7 @@ public class PlayActivity extends Activity {
                                     com++;
                                     combo.setText(com + " combo");
 
-                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == btn_key3.getLeft() && hit3) {
+                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == btn_key3.getLeft() && hit3) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     hit3=false;
@@ -188,7 +188,7 @@ public class PlayActivity extends Activity {
                                     com++;
                                     combo.setText(com + " combo");
 
-                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == btn_key4.getLeft() && hit4) {
+                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == btn_key4.getLeft() && hit4) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     hit4=false;
