@@ -11,6 +11,7 @@ import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -42,10 +43,8 @@ public class PlayActivity extends Activity {
     private boolean hit4=false;
     private String mm="";
     private static MediaPlayer mp;
-    private Intent get;
     private List<NoteVO> noteVOS = new ArrayList<>();
 
-    private ArrayList<Note> noteList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +78,8 @@ public class PlayActivity extends Activity {
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
+
+
                 if(msg.what==777){
 
                     try {
@@ -89,7 +90,6 @@ public class PlayActivity extends Activity {
                     mp.start();
                 }
                 if (msg.what == 1) {
-
                     ((ImageView) msg.obj).setX(btn_key1.getLeft());
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
@@ -358,6 +358,7 @@ public class PlayActivity extends Activity {
     @Override
     public void onBackPressed() {
         mp.pause();
+
 
 
         final AlertDialog alertDialog = new AlertDialog.Builder(this)
