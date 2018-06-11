@@ -28,7 +28,8 @@ public class PlayActivity extends Activity {
     private Button btn_key1, btn_key2, btn_key3, btn_key4;
     private ImageView iv_backbox1, iv_backbox2, iv_backbox3, iv_backbox4, loca, iv_setting, iv_hit;
     private Handler handler;
-    private TextView tv_score, combo;
+    private TextView tv_score;
+    private Combo combo;
     private int score2 = 0;
     private int com = 0;
     private int goodcnt = 0;
@@ -69,8 +70,8 @@ public class PlayActivity extends Activity {
         iv_setting = findViewById(R.id.iv_setting);
 
         loca = findViewById(R.id.loca);
-        combo = findViewById(R.id.tv_combo);
         bar = findViewById(R.id.progress_1);
+        combo = Combo.getInstance(this);
 
         iv_hit = findViewById(R.id.iv_hit);
         tv_score = findViewById(R.id.tv_score);
@@ -183,14 +184,14 @@ public class PlayActivity extends Activity {
                                         tv_score.setText("SCORE : " + score2);
                                         iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
-                                        combo.setText(com + " combo");
+                                        combo.setCombo(com);
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
                                         iv_hit.setImageResource(R.drawable.good);
                                         com++;
-                                        combo.setText(com + " combo");
+                                        combo.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
 
@@ -206,14 +207,14 @@ public class PlayActivity extends Activity {
                                         tv_score.setText("SCORE : " + score2);
                                         iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
-                                        combo.setText(com + " combo");
+                                        combo.setCombo(com);
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
                                         iv_hit.setImageResource(R.drawable.good);
                                         com++;
-                                        combo.setText(com + " combo");
+                                        combo.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
@@ -227,14 +228,14 @@ public class PlayActivity extends Activity {
                                         tv_score.setText("SCORE : " + score2);
                                         iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
-                                        combo.setText(com + " combo");
+                                        combo.setCombo(com);
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
                                         iv_hit.setImageResource(R.drawable.good);
                                         com++;
-                                        combo.setText(com + " combo");
+                                        combo.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
@@ -247,14 +248,14 @@ public class PlayActivity extends Activity {
                                         tv_score.setText("SCORE : " + score2);
                                         iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
-                                        combo.setText(com + " combo");
+                                        combo.setCombo(com);
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
                                         iv_hit.setImageResource(R.drawable.good);
                                         com++;
-                                        combo.setText(com + " combo");
+                                        combo.setCombo(com);
 
                                     }
                                     layout_play.getViewById(i).setY(y + 500); //판정되면 바로 밑으로 내려가버리게
@@ -278,7 +279,7 @@ public class PlayActivity extends Activity {
                                     misscnt++;
                                     iv_hit.setImageResource(R.drawable.miss);
                                     com = 0;
-                                    combo.setText("");
+                                    combo.setCombo(com);
                                 }
 
                             }
