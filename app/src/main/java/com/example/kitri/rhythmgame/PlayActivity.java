@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayActivity extends Activity {
-    private int NOTE_WIDTH = 200, NOTE_HEIGHT = 30;
+    private int NOTE_WIDTH = 200, NOTE_HEIGHT = 50;
 
     private ConstraintLayout layout_play;
     private Button btn_key1, btn_key2, btn_key3, btn_key4;
