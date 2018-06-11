@@ -16,25 +16,20 @@
 
     <Button
         android:id="@+id/btn_start"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="200dp"
-        android:background="#20000000"
-        android:text="start"
-        android:textSize="50sp"
-        android:textStyle="bold"
+        android:background="@drawable/title_start_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/btn_setting"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="100dp"
-        android:background="#20000000"
-        android:text="setting"
-        android:textSize="20sp"
+        android:background="@drawable/title_option_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
