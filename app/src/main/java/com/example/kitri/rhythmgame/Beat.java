@@ -140,10 +140,10 @@ public class Beat {
 //13
                 voList.add(new NoteVO(100, 2));
                 voList.add(new NoteVO(100, 1));
-                voList.add(new NoteVO(400, 3));
+                voList.add(new NoteVO(300, 3));
                 voList.add(new NoteVO(100, 1));
                 voList.add(new NoteVO(100, 3));
-                voList.add(new NoteVO(400, 2));
+                voList.add(new NoteVO(300, 2));
                 voList.add(new NoteVO(100, 2));
                 voList.add(new NoteVO(100, 3));
                 voList.add(new NoteVO(400, 1));
@@ -156,79 +156,12 @@ public class Beat {
                 voList.add(new NoteVO(400, 3));
                 voList.add(new NoteVO(100, 4));
                 voList.add(new NoteVO(100, 2));
-                voList.add(new NoteVO(500, 3));
+                voList.add(new NoteVO(400, 3));
 //15
                 voList.add(new NoteVO(100, 4));
                 voList.add(new NoteVO(100, 3));
                 voList.add(new NoteVO(100, 2));
                 voList.add(new NoteVO(100, 1));
-
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 2));
-//        voList.add(new NoteVO(new NoteVO(450, 3));
-//        voList.add(new NoteVO(new NoteVO(450, 4));
-//        voList.add(new NoteVO(new NoteVO(450, 4));
-//        voList.add(new NoteVO(new NoteVO(900, 4));
-//
-//        voList.add(new NoteVO(new NoteVO(450, 2));
-//
-//        voList.add(new NoteVO(new NoteVO(225, 3));
-//        voList.add(new NoteVO(new NoteVO(225, 2));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(225, 2));
-//        voList.add(new NoteVO(new NoteVO(1125, 3));
-//
-//        voList.add(new NoteVO(new NoteVO(225, 2));
-//
-//
-//        voList.add(new NoteVO(new NoteVO(225, 4));
-//        voList.add(new NoteVO(new NoteVO(225, 3));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 2));
-//        voList.add(new NoteVO(new NoteVO(900, 3));
-//        voList.add(new NoteVO(new NoteVO(450, 4));
-//        voList.add(new NoteVO(new NoteVO(450, 4));
-//
-//        voList.add(new NoteVO(new NoteVO(450, 4));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 2));
-//        voList.add(new NoteVO(new NoteVO(225, 3));
-//        voList.add(new NoteVO(new NoteVO(225, 2));
-//        voList.add(new NoteVO(new NoteVO(1250, 4));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 2));
-//        voList.add(new NoteVO(new NoteVO(450, 3));
-//        voList.add(new NoteVO(new NoteVO(450, 4));
-//        voList.add(new NoteVO(new NoteVO(450, 4));
-//        voList.add(new NoteVO(new NoteVO(1350, 4));
-//
-//        voList.add(new NoteVO(new NoteVO(225, 2));
-//
-//        voList.add(new NoteVO(new NoteVO(225, 3));
-//        voList.add(new NoteVO(new NoteVO(450, 2));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(1350, 3));
-//        voList.add(new NoteVO(new NoteVO(225, 4));
-//        voList.add(new NoteVO(new NoteVO(225, 3));
-//        voList.add(new NoteVO(new NoteVO(225, 4));
-//        voList.add(new NoteVO(new NoteVO(0, 2));
-//        voList.add(new NoteVO(new NoteVO(450, 1));
-//        voList.add(new NoteVO(new NoteVO(0, 2));
-//        voList.add(new NoteVO(new NoteVO(450, 3));
-//        voList.add(new NoteVO(new NoteVO(0, 1));
-//        voList.add(new NoteVO(new NoteVO(450, 2));
-//        voList.add(new NoteVO(new NoteVO(0, 2));
-//        voList.add(new NoteVO(new NoteVO(450, 3));
-//        voList.add(new NoteVO(new NoteVO(0, 3));
-//        voList.add(new NoteVO(new NoteVO(450, 4));
-
-        //
         
         return voList;
 
