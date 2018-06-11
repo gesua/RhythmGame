@@ -23,7 +23,7 @@ import java.util.List;
 public class PlayActivity extends Activity {
     private ConstraintLayout layout_play;
     private Button btn_key1, btn_key2, btn_key3, btn_key4;
-    private ImageView iv_hitbox1, iv_hitbox2, iv_hitbox3, iv_hitbox4, loca;
+    private ImageView iv_backbox1, iv_backbox2, iv_backbox3, iv_backbox4, loca;
     private Handler handler;
     private TextView tv, tv_score, combo;
     private int score2 = 0;
@@ -59,10 +59,10 @@ public class PlayActivity extends Activity {
         btn_key3 = findViewById(R.id.btn_key3);
         btn_key4 = findViewById(R.id.btn_key4);
 
-        iv_hitbox1 = findViewById(R.id.iv_hitbox1);
-        iv_hitbox2 = findViewById(R.id.iv_hitbox2);
-        iv_hitbox3 = findViewById(R.id.iv_hitbox3);
-        iv_hitbox4 = findViewById(R.id.iv_hitbox4);
+        iv_backbox1 = findViewById(R.id.iv_backbox1);
+        iv_backbox2 = findViewById(R.id.iv_backbox2);
+        iv_backbox3 = findViewById(R.id.iv_backbox3);
+        iv_backbox4 = findViewById(R.id.iv_backbox4);
 
         loca = findViewById(R.id.loca);
         combo = findViewById(R.id.tv_combo);
@@ -149,11 +149,11 @@ public class PlayActivity extends Activity {
 
                         if (layout_play.getViewById(i) != null) {
                             float y = layout_play.getViewById(i).getY();
-                            if (y < btn_key1.getTop()) {
-                                y += 10
+                            if (y < btn_key1.getTop()+150) {
+                                y +=15
                                 ; //노트스피드
                                 layout_play.getViewById(i).setY(y);
-                                if (y > loca.getTop() - 50 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == btn_key1.getLeft() && hit1) {
+                                if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == btn_key1.getLeft() && hit1) {
 
                                     hit1=false;
 
@@ -165,7 +165,7 @@ public class PlayActivity extends Activity {
                                     com++;
                                     combo.setText(com + " combo");
 
-                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == btn_key2.getLeft() && hit2) {
+                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == btn_key2.getLeft() && hit2) {
                                     hit2=false;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
 
@@ -176,7 +176,7 @@ public class PlayActivity extends Activity {
                                     com++;
                                     combo.setText(com + " combo");
 
-                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == btn_key3.getLeft() && hit3) {
+                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == btn_key3.getLeft() && hit3) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     hit3=false;
@@ -188,7 +188,7 @@ public class PlayActivity extends Activity {
                                     com++;
                                     combo.setText(com + " combo");
 
-                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == btn_key4.getLeft() && hit4) {
+                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == btn_key4.getLeft() && hit4) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     hit4=false;
@@ -265,14 +265,14 @@ public class PlayActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    iv_hitbox1.setVisibility(View.VISIBLE);
+                    iv_backbox1.setVisibility(View.VISIBLE);
                    hit1=true;
 
 
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    iv_hitbox1.setVisibility(View.GONE);
+                    iv_backbox1.setVisibility(View.GONE);
                     hit1=false;
 
                 }
@@ -285,14 +285,14 @@ public class PlayActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    iv_hitbox2.setVisibility(View.VISIBLE);
+                    iv_backbox2.setVisibility(View.VISIBLE);
                     hit2=true;
 
 
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    iv_hitbox2.setVisibility(View.GONE);
+                    iv_backbox2.setVisibility(View.GONE);
                     hit2=false;
                 }
 
@@ -304,14 +304,14 @@ public class PlayActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    iv_hitbox3.setVisibility(View.VISIBLE);
+                    iv_backbox3.setVisibility(View.VISIBLE);
                     hit3=true;
 
 
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    iv_hitbox3.setVisibility(View.GONE);
+                    iv_backbox3.setVisibility(View.GONE);
                     hit3=false;
                 }
 
@@ -322,14 +322,14 @@ public class PlayActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    iv_hitbox4.setVisibility(View.VISIBLE);
+                    iv_backbox4.setVisibility(View.VISIBLE);
 
                     hit4=true;
 
                 }
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    iv_hitbox4.setVisibility(View.GONE);
+                    iv_backbox4.setVisibility(View.GONE);
                     hit4=false;
                 }
 
