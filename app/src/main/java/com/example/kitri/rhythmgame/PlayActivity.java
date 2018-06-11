@@ -88,25 +88,22 @@ public class PlayActivity extends Activity {
                     }
                     mp.start();
                 }
+
+                // 노트 위치 세팅
                 if (msg.what == 1) {
-
-                    ((ImageView) msg.obj).setX(btn_key1.getLeft());
+                    ((ImageView) msg.obj).setX(btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2));
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
-
-
                 } else if (msg.what == 2) {
-                    ((ImageView) msg.obj).setX(btn_key2.getLeft());
+                    ((ImageView) msg.obj).setX(btn_key2.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2));
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
-
                 } else if (msg.what == 3) {
-                    ((ImageView) msg.obj).setX(btn_key3.getLeft());
+                    ((ImageView) msg.obj).setX(btn_key3.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2));
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
-
                 } else if (msg.what == 4) {
-                    ((ImageView) msg.obj).setX(btn_key4.getLeft());
+                    ((ImageView) msg.obj).setX(btn_key4.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2));
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
 
