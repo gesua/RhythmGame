@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,9 +26,9 @@ public class PlayActivity extends Activity {
 
     private ConstraintLayout layout_play;
     private Button btn_key1, btn_key2, btn_key3, btn_key4;
-    private ImageView iv_backbox1, iv_backbox2, iv_backbox3, iv_backbox4, loca, iv_setting;
+    private ImageView iv_backbox1, iv_backbox2, iv_backbox3, iv_backbox4, loca, iv_setting, iv_hit;
     private Handler handler;
-    private TextView tv, tv_score, combo;
+    private TextView tv_score, combo;
     private int score2 = 0;
     private int com = 0;
     private int goodcnt = 0;
@@ -48,7 +47,7 @@ public class PlayActivity extends Activity {
     private String mm = "";
     private static MediaPlayer mp;
     private List<NoteVO> noteVOS = new ArrayList<>();
-    private int deldteNoteCnt=0;
+    private int deldteNoteCnt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +72,7 @@ public class PlayActivity extends Activity {
         combo = findViewById(R.id.tv_combo);
         bar = findViewById(R.id.progress_1);
 
-        tv = findViewById(R.id.tv_hit);
+        iv_hit = findViewById(R.id.iv_hit);
         tv_score = findViewById(R.id.tv_score);
         score2 = 0;
 
@@ -160,8 +159,8 @@ public class PlayActivity extends Activity {
                     }
                 } else if (msg.what == 999) {
 
-                        for(int j=0; j<deldteNoteCnt; j++){
-                        if(layout_play.getViewById(j).getVisibility()!=View.GONE){
+                    for (int j = 0; j < deldteNoteCnt; j++) {
+                        if (layout_play.getViewById(j).getVisibility() != View.GONE) {
                             layout_play.getViewById(j).setVisibility(View.GONE); //혹시 이미지 남아있으면 제거용
                         }
                     }
@@ -182,18 +181,18 @@ public class PlayActivity extends Activity {
                                         perfectcnt++;
                                         score2 += 15;
                                         tv_score.setText("SCORE : " + score2);
-                                        tv.setText("Perfect");
+                                        iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
                                         combo.setText(com + " combo");
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
-                                        tv.setText("Good");
+                                        iv_hit.setImageResource(R.drawable.good);
                                         com++;
                                         combo.setText(com + " combo");
                                     }
-                                    layout_play.getViewById(i).setY(y+500);
+                                    layout_play.getViewById(i).setY(y + 500);
 
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
                                     hit2 = false;
@@ -205,39 +204,39 @@ public class PlayActivity extends Activity {
                                         score2 += 15;
 
                                         tv_score.setText("SCORE : " + score2);
-                                        tv.setText("Perfect");
+                                        iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
                                         combo.setText(com + " combo");
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
-                                        tv.setText("Good");
+                                        iv_hit.setImageResource(R.drawable.good);
                                         com++;
                                         combo.setText(com + " combo");
                                     }
-                                    layout_play.getViewById(i).setY(y+500);
+                                    layout_play.getViewById(i).setY(y + 500);
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     hit3 = false;
                                     deldteNoteCnt++;
-                                    if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){
+                                    if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
                                         perfectcnt++;
                                         score2 += 15;
                                         tv_score.setText("SCORE : " + score2);
-                                        tv.setText("Perfect");
+                                        iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
                                         combo.setText(com + " combo");
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
-                                        tv.setText("Good");
+                                        iv_hit.setImageResource(R.drawable.good);
                                         com++;
                                         combo.setText(com + " combo");
                                     }
-                                    layout_play.getViewById(i).setY(y+500);
+                                    layout_play.getViewById(i).setY(y + 500);
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
                                     hit4 = false;
                                     deldteNoteCnt++;
@@ -246,19 +245,19 @@ public class PlayActivity extends Activity {
                                         perfectcnt++;
                                         score2 += 15;
                                         tv_score.setText("SCORE : " + score2);
-                                        tv.setText("Perfect");
+                                        iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
                                         combo.setText(com + " combo");
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
-                                        tv.setText("Good");
+                                        iv_hit.setImageResource(R.drawable.good);
                                         com++;
                                         combo.setText(com + " combo");
 
                                     }
-                                    layout_play.getViewById(i).setY(y+500); //판정되면 바로 밑으로 내려가버리게
+                                    layout_play.getViewById(i).setY(y + 500); //판정되면 바로 밑으로 내려가버리게
                                 } else {
                                     layout_play.getViewById(i).setY(y);
                                 }
@@ -277,7 +276,7 @@ public class PlayActivity extends Activity {
                                     }
 
                                     misscnt++;
-                                    tv.setText("Miss");
+                                    iv_hit.setImageResource(R.drawable.miss);
                                     com = 0;
                                     combo.setText("");
                                 }
@@ -287,10 +286,10 @@ public class PlayActivity extends Activity {
 
                         }
                     }
-                    hit1=false; //누르고있을때 판정되는거 막기
-                    hit2=false;
-                    hit3=false;
-                    hit4=false;
+                    hit1 = false; //누르고있을때 판정되는거 막기
+                    hit2 = false;
+                    hit3 = false;
+                    hit4 = false;
 
                 } //msg.999 end
                 if (maxcom < com) {
