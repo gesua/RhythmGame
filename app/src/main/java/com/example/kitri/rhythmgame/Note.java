@@ -37,12 +37,11 @@ public class Note extends Thread {
             }
             Thread.sleep(5000); //마지막 노트 나온후 대기시간
             Message msg = new Message();
-            msg.what =5;  //노트  다 나왔을시 5번
+            msg.what = 5;  //노트  다 나왔을시 5번
 
             handler.sendMessage(msg);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
-
 }
