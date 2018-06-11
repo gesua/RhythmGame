@@ -5,6 +5,8 @@ import android.os.Message;
 
 public class Down extends Thread {
     boolean next=true;
+    boolean wait=false;
+
     Handler handler;
 
     public Down(Handler handler) {
@@ -12,6 +14,9 @@ public class Down extends Thread {
 
     }
 
+    public void setWait(boolean wait) {
+        this.wait = wait;
+    }
 
     @Override
     public void run() {
@@ -21,8 +26,11 @@ public class Down extends Thread {
                 message.what = 999;
 
                 handler.sendMessage(message);
+                while (wait){
+                    //일시정지 하면 대기
+                }
 
-                Thread.sleep(3); // 프레임 1000/x
+                Thread.sleep(4); // 프레임 1000/x
 
             }
         } catch (InterruptedException e) {

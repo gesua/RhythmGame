@@ -10,6 +10,11 @@ public class Note extends Thread {
     private ConstraintLayout iv;
     private Handler handler;
     private List<NoteVO> number;
+    private boolean wait = false;
+
+    public void setWait(boolean wait) {
+        this.wait = wait;
+    }
 
     public Note(ConstraintLayout iv, Handler handler, List<NoteVO> number) {
         this.iv = iv;
@@ -31,7 +36,9 @@ public class Note extends Thread {
                 msg.arg2 = 0;
 
                 handler.sendMessage(msg);
+                while(wait){
 
+                }
 
                 Thread.sleep(number.get(i).getTime()); //다음 노트 간격
             }

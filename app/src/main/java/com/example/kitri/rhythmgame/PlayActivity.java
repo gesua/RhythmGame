@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ public class PlayActivity extends Activity {
     private int goodcnt = 0;
     private int misscnt = 0;
     private int maxcom = 0;
+    private int perfectcnt=0;
     private ProgressBar bar;
     private Down down;
     private Note note;
@@ -95,27 +97,34 @@ public class PlayActivity extends Activity {
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
                 } else if (msg.what == 2) {
-                    ((ImageView) msg.obj).setX(btn_key2.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2));
+                    ((ImageView) msg.obj).setX(btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2));
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
                 } else if (msg.what == 3) {
-                    ((ImageView) msg.obj).setX(btn_key3.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2));
+                    ((ImageView) msg.obj).setX(btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2));
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
                 } else if (msg.what == 4) {
-                    ((ImageView) msg.obj).setX(btn_key4.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2));
+                    ((ImageView) msg.obj).setX(btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2));
                     ((ImageView) msg.obj).setY(msg.arg2);
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
 
                 } else if (msg.what == 5) {
                     if (misscnt == 0) {
-                        mm = "Full Combo";
+
+                        if(goodcnt==0){
+                            mm="Perfect";
+
+                        }else{
+                            mm = "Full Combo";
+                        }
+
                     }
                     if (!PlayActivity.this.isFinishing()) { //액티비티가 살아있는지 체크
                         alertDialog = new AlertDialog.Builder(PlayActivity.this);
                         mp.stop();
 
-                        alertDialog.setTitle("연주완료     " + mm).setMessage("SCORE : " + score2 + "\n" + "GOOD : " + goodcnt + "\n" + "MISS : " + misscnt + "\n" + "MAXCOMBO : " + maxcom)
+                        alertDialog.setTitle("연주완료     " + mm).setMessage("SCORE : " + score2 + "\n" + "PERFECT : " + perfectcnt + "\n" +"GOOD : " + goodcnt + "\n" + "MISS : " + misscnt + "\n" + "MAXCOMBO : " + maxcom)
                                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -146,65 +155,96 @@ public class PlayActivity extends Activity {
 
                         if (layout_play.getViewById(i) != null) {
                             float y = layout_play.getViewById(i).getY();
-                            if (y < btn_key1.getTop() + 150) {
-                                y += 5; //노트스피드
-                                layout_play.getViewById(i).setY(y);
-                                if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1)
-                                {
+                            y += 5; //노트스피드
+                            layout_play.getViewById(i).setY(y);
+
+                            if (y < btn_key1.getBottom() + 200) {
+                                if (y > loca.getTop() -100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
 
                                     hit1 = false;
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-                                    goodcnt++;
-                                    score2 += 10;
-                                    tv_score.setText("SCORE : " + score2);
-                                    tv.setText("Good");
-                                    com++;
-                                    combo.setText(com + " combo");
+                                    if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){ //퍼펙트판정
+                                        perfectcnt++;
+                                        score2 += 15;
+                                        tv_score.setText("SCORE : " + score2);
+                                        tv.setText("Perfect");
+                                        com++;
+                                        combo.setText(com + " combo");
+                                    }else {
+                                        goodcnt++;
+                                        score2 += 10;
+                                        tv_score.setText("SCORE : " + score2);
+                                        tv.setText("Good");
+                                        com++;
+                                        combo.setText(com + " combo");
+                                    }
 
-                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
+                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
                                     hit2 = false;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-
-                                    goodcnt++;
-                                    score2 += 10;
-                                    tv_score.setText("SCORE : " + score2);
-                                    tv.setText("Good");
-                                    com++;
-                                    combo.setText(com + " combo");
-
-                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
+                                    if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){
+                                        perfectcnt++;
+                                        score2 += 15;
+                                        tv_score.setText("SCORE : " + score2);
+                                        tv.setText("Perfect");
+                                        com++;
+                                        combo.setText(com + " combo");
+                                    }else {
+                                        goodcnt++;
+                                        score2 += 10;
+                                        tv_score.setText("SCORE : " + score2);
+                                        tv.setText("Good");
+                                        com++;
+                                        combo.setText(com + " combo");
+                                    }
+                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     hit3 = false;
-
-                                    goodcnt++;
-                                    score2 += 10;
-                                    tv_score.setText("SCORE : " + score2);
-                                    tv.setText("Good");
-                                    com++;
-                                    combo.setText(com + " combo");
-
-                                } else if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
-
-                                    layout_play.getViewById(i).setVisibility(View.GONE);
+                                    if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){
+                                        perfectcnt++;
+                                        score2 += 15;
+                                        tv_score.setText("SCORE : " + score2);
+                                        tv.setText("Perfect");
+                                        com++;
+                                        combo.setText(com + " combo");
+                                    }else {
+                                        goodcnt++;
+                                        score2 += 10;
+                                        tv_score.setText("SCORE : " + score2);
+                                        tv.setText("Good");
+                                        com++;
+                                        combo.setText(com + " combo");
+                                    }
+                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
                                     hit4 = false;
-                                    goodcnt++;
-                                    score2 += 10;
-                                    tv_score.setText("SCORE : " + score2);
-                                    tv.setText("Good");
-                                    com++;
-                                    combo.setText(com + " combo");
+                                    layout_play.getViewById(i).setVisibility(View.GONE);
+                                    if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){
+                                        perfectcnt++;
+                                        score2 += 15;
+                                        tv_score.setText("SCORE : " + score2);
+                                        tv.setText("Perfect");
+                                        com++;
+                                        combo.setText(com + " combo");
+                                    }else {
+                                        goodcnt++;
+                                        score2 += 10;
+                                        tv_score.setText("SCORE : " + score2);
+                                        tv.setText("Good");
+                                        com++;
+                                        combo.setText(com + " combo");
 
+                                    }
                                 } else {
                                     layout_play.getViewById(i).setY(y);
                                 }
 
-                            } else { //미스 판정선 넘어가면
+                            } else { //미스 판정
                                 if (layout_play.getViewById(i).getVisibility() != View.GONE) {
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     if (bar.getProgress() > 0) {
-                                        bar.setProgress(bar.getProgress() - 3);
+                                        bar.setProgress(bar.getProgress() - 1); //미스 1당 체력바 감소량
                                     } else {
                                         down.interrupt();
                                         note.interrupt();
@@ -352,30 +392,36 @@ public class PlayActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        mp.pause();
+        if (bar.getProgress() > 0) {
+            mp.pause();
+            note.setWait(true);
+            down.setWait(true);
+            final AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("설정")
+                    .setPositiveButton("종료", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            down.interrupt();
+                            note.interrupt();
+                            finish();
 
+                        }
+                    })
+                    .setNegativeButton("계속하기", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            down.setWait(false);
+                            note.setWait(false);
+                            mp.start();
 
-        final AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("설정")
-                .setPositiveButton("종료", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        down.interrupt();
-                        note.interrupt();
-                        finish();
-                        dialog.cancel();
-                    }
-                })
-                .setNegativeButton("계속하기", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
+            alertDialog.setCancelable(false);
 
-
-                        dialog.cancel();
-                    }
-                })
-                .show();
-
+        } else {
+            finish();
+        }
     }
 }
