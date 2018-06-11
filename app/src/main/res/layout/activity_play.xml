@@ -59,7 +59,7 @@
         android:layout_width="0dp"
         android:layout_height="11dp"
         android:background="#50ff888a"
-        app:layout_constraintBottom_toBottomOf="@id/loca"
+
         app:layout_constraintLeft_toLeftOf="@id/btn_key1"
         app:layout_constraintRight_toRightOf="@id/btn_key4"
         app:layout_constraintTop_toTopOf="@id/loca" />
@@ -77,11 +77,11 @@
 
     <ImageView
         android:id="@+id/iv_hitbox1"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
-        android:background="#00000000"
+        android:background="#20000000"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/btn_key1"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -89,10 +89,10 @@
 
     <ImageView
         android:id="@+id/iv_hitbox2"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_marginBottom="20dp"
-        android:background="#00000000"
+        android:background="#20000000"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/btn_key1"
         app:layout_constraintLeft_toLeftOf="@id/btn_key2"
@@ -100,10 +100,10 @@
 
     <ImageView
         android:id="@+id/iv_hitbox3"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_marginBottom="20dp"
-        android:background="#00000000"
+        android:background="#20000000"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/btn_key1"
         app:layout_constraintLeft_toLeftOf="@id/btn_key3"
@@ -111,11 +111,11 @@
 
     <ImageView
         android:id="@+id/iv_hitbox4"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="20sp"
-        android:background="#00000000"
+        android:background="#20000000"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/btn_key1"
         app:layout_constraintLeft_toLeftOf="@id/btn_key4"

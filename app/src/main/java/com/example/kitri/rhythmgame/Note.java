@@ -2,55 +2,47 @@ package com.example.kitri.rhythmgame;
 
 import android.os.Handler;
 import android.os.Message;
-import android.widget.ImageView;
+import android.support.constraint.ConstraintLayout;
 
-public class Note {
-    private final int NOTE_SPEED = 20;
+import java.util.List;
 
-    private int x, y = 150;
-    private ImageView iv;
+public class Note extends Thread {
+    private ConstraintLayout iv;
     private Handler handler;
-    private boolean dead = false;
+    private List<NoteVO> number;
 
-    public Note(float x, ImageView iv, Handler handler) {
-        this.x = (int) x;
+    public Note(ConstraintLayout iv, Handler handler, List<NoteVO> number) {
         this.iv = iv;
         this.handler = handler;
+        this.number = number;
 
-        Message msg = new Message();
-        msg.what = 3; // 3:노트 생성
-        msg.obj = iv;
-        handler.sendMessage(msg);
     }
 
-    // 노트 떨어짐
-    public void drop() {
-        Message msg = new Message();
-        msg.what = 1; // 1:노트 움직이기
-        msg.obj = iv;
-        msg.arg1 = x;
-        msg.arg2 = y;
-        handler.sendMessage(msg);
 
-        y += NOTE_SPEED;
+    @Override
+    public void run() {
+
+        try {
+            Thread.sleep(3000); //시작시 첫노트 대기시간
+            for (int i = 0; i < number.size(); i++) { //size=노트개수
+                Message msg = new Message();
+                msg.what = number.get(i).getType(); //노트 라인
+                msg.obj = iv.getViewById(i);
+                msg.arg2 = 0;
+
+                handler.sendMessage(msg);
 
 
-        if (y >= 2000) {
-            delete();
+                Thread.sleep(number.get(i).getTime()); //다음 노트 간격
+            }
+            Thread.sleep(5000); //마지막 노트 나온후 대기시간
+            Message msg = new Message();
+            msg.what =5;  //노트  다 나왔을시 5번
+
+            handler.sendMessage(msg);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-    // 노트 삭제
-    public void delete() {
-        Message msg = new Message();
-        msg.what = 2; // 2:삭제
-        msg.obj = iv;
-        handler.sendMessage(msg);
-
-        dead = true;
-    }
-
-    public boolean isDead() {
-        return dead;
-    }
 }
