@@ -15,7 +15,7 @@ public class MusicThead extends Thread {
     public void run() {
 
         try {
-            Thread.sleep(1400); //노래시작 지연시간
+            Thread.sleep(1600); //노래시작 지연시간
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
