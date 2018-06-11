@@ -159,7 +159,8 @@ public class PlayActivity extends Activity {
                         dialog.setCancelable(false);
                     }
                 } else if (msg.what == 999) {
-                    for(int j=0; j<deldteNoteCnt; j++){
+
+                        for(int j=0; j<deldteNoteCnt; j++){
                         if(layout_play.getViewById(j).getVisibility()!=View.GONE){
                             layout_play.getViewById(j).setVisibility(View.GONE); //혹시 이미지 남아있으면 제거용
                         }
@@ -283,6 +284,11 @@ public class PlayActivity extends Activity {
 
                         }
                     }
+                    hit1=false;
+                    hit2=false;
+                    hit3=false;
+                    hit4=false;
+
                 } //msg.999 end
                 if (maxcom < com) {
                     maxcom = com;
