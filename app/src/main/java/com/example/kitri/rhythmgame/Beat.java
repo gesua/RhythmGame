@@ -23,27 +23,27 @@ public class Beat {
                 voList.add(new NoteVO(500, 3));
                 voList.add(new NoteVO(100, 2));
                 voList.add(new NoteVO(100, 4));
-                voList.add(new NoteVO(100, 3));
+                voList.add(new NoteVO(300, 3));
                 voList.add(new NoteVO(100, 3));
                 voList.add(new NoteVO(100, 1));
                 voList.add(new NoteVO(400, 2));
 //2
                 voList.add(new NoteVO(100, 3));
                 voList.add(new NoteVO(100, 1));
-                voList.add(new NoteVO(400, 2));
+                voList.add(new NoteVO(300, 2));
                 voList.add(new NoteVO(100, 4));
                 voList.add(new NoteVO(100, 2));
-                voList.add(new NoteVO(400, 1));
+                voList.add(new NoteVO(300, 1));
                 voList.add(new NoteVO(100, 3));
                 voList.add(new NoteVO(100, 1));
-                voList.add(new NoteVO(300, 2));
+                voList.add(new NoteVO(500, 2));
 //3
                 voList.add(new NoteVO(100, 3));
                 voList.add(new NoteVO(100, 1));
                 voList.add(new NoteVO(300, 2));
                 voList.add(new NoteVO(100, 1));
                 voList.add(new NoteVO(100, 4));
-                voList.add(new NoteVO(600, 3));
+                voList.add(new NoteVO(500, 3));
                 voList.add(new NoteVO(100, 4));
                 voList.add(new NoteVO(100, 2));
                 voList.add(new NoteVO(400, 1));
