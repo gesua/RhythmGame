@@ -169,7 +169,7 @@ public class PlayActivity extends Activity {
 
                         if (layout_play.getViewById(i) != null) {
                             float y = layout_play.getViewById(i).getY();
-                            y += 20; //노트스피드
+                            y += 25; //노트스피드 기본 25 최소5 최대 50
                             layout_play.getViewById(i).setY(y);
                             Log.d("아래",layout_play.getViewById(i).getTop()+"+++++"+layout_play.getViewById(i).getBottom()+"----"+layout_play.getViewById(i).getId());
                             if (y < btn_key1.getBottom() + 200) {
