@@ -48,6 +48,7 @@ public class PlayActivity extends Activity {
     private String mm = "";
     private static MediaPlayer mp;
     private List<NoteVO> noteVOS = new ArrayList<>();
+    private int deldteNoteCnt=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,8 @@ public class PlayActivity extends Activity {
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
 
                 } else if (msg.what == 5) {
+                    down.interrupt();
+                    note.interrupt();
                     if (misscnt == 0) {
 
                         if(goodcnt==0){
@@ -149,20 +152,24 @@ public class PlayActivity extends Activity {
                         dialog.setCancelable(false);
                     }
                 } else if (msg.what == 999) {
-
-                    for (int i = 0; i < noteVOS.size(); i++) {
+                    for(int j=0; j<deldteNoteCnt; j++){
+                        if(layout_play.getViewById(j).getVisibility()!=View.GONE){
+                            layout_play.getViewById(j).setVisibility(View.GONE); //혹시 이미지 남아있으면 제거용
+                        }
+                    }
+                    for (int i = deldteNoteCnt; i < noteVOS.size(); i++) {
 
 
                         if (layout_play.getViewById(i) != null) {
                             float y = layout_play.getViewById(i).getY();
-                            y += 5; //노트스피드
+                            y += 20; //노트스피드
                             layout_play.getViewById(i).setY(y);
-
+                            Log.d("아래",layout_play.getViewById(i).getTop()+"+++++"+layout_play.getViewById(i).getBottom()+"----"+layout_play.getViewById(i).getId());
                             if (y < btn_key1.getBottom() + 200) {
                                 if (y > loca.getTop() -100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
 
                                     hit1 = false;
-
+                                    deldteNoteCnt++;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){ //퍼펙트판정
                                         perfectcnt++;
@@ -183,9 +190,11 @@ public class PlayActivity extends Activity {
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
                                     hit2 = false;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
+                                    deldteNoteCnt++;
                                     if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){
                                         perfectcnt++;
                                         score2 += 15;
+
                                         tv_score.setText("SCORE : " + score2);
                                         tv.setText("Perfect");
                                         com++;
@@ -202,6 +211,7 @@ public class PlayActivity extends Activity {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     hit3 = false;
+                                    deldteNoteCnt++;
                                     if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){
                                         perfectcnt++;
                                         score2 += 15;
@@ -219,6 +229,7 @@ public class PlayActivity extends Activity {
                                     }
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
                                     hit4 = false;
+                                    deldteNoteCnt++;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){
                                         perfectcnt++;
@@ -242,6 +253,7 @@ public class PlayActivity extends Activity {
 
                             } else { //미스 판정
                                 if (layout_play.getViewById(i).getVisibility() != View.GONE) {
+                                    deldteNoteCnt++;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     if (bar.getProgress() > 0) {
                                         bar.setProgress(bar.getProgress() - 1); //미스 1당 체력바 감소량
@@ -386,6 +398,8 @@ public class PlayActivity extends Activity {
 
     @Override
     public void finish() {
+        down.interrupt();
+        note.interrupt();
         super.finish();
         overridePendingTransition(0, 0);
     }

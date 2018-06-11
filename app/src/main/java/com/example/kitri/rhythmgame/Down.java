@@ -30,7 +30,7 @@ public class Down extends Thread {
                     //일시정지 하면 대기
                 }
 
-                Thread.sleep(4); // 프레임 1000/x
+                Thread.sleep(18); // 프레임 1000/x
 
             }
         } catch (InterruptedException e) {
