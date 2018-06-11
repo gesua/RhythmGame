@@ -74,52 +74,6 @@
         app:layout_constraintTop_toTopOf="@+id/iv_hit_bar" />
 
     <ImageView
-        android:id="@+id/iv_hitbox1"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="#00000000"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@+id/btn_key1" />
-
-    <ImageView
-        android:id="@+id/iv_hitbox2"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="20dp"
-        android:background="#00000000"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key1"
-        app:layout_constraintLeft_toLeftOf="@+id/btn_key2"
-        app:layout_constraintRight_toRightOf="@+id/btn_key2" />
-
-    <ImageView
-        android:id="@+id/iv_hitbox3"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="20dp"
-        android:background="#00000000"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key1"
-        app:layout_constraintLeft_toLeftOf="@+id/btn_key3"
-        app:layout_constraintRight_toRightOf="@+id/btn_key3" />
-
-    <ImageView
-        android:id="@+id/iv_hitbox4"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20sp"
-        android:background="#00000000"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key1"
-        app:layout_constraintLeft_toLeftOf="@+id/btn_key4"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <ImageView
         android:id="@+id/iv_backbox1"
         android:layout_width="0dp"
         android:layout_height="0dp"
