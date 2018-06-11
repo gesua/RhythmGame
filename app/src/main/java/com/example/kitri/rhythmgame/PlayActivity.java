@@ -27,7 +27,7 @@ public class PlayActivity extends Activity {
 
     private ConstraintLayout layout_play;
     private Button btn_key1, btn_key2, btn_key3, btn_key4;
-    private ImageView iv_backbox1, iv_backbox2, iv_backbox3, iv_backbox4, loca;
+    private ImageView iv_backbox1, iv_backbox2, iv_backbox3, iv_backbox4, loca, iv_setting;
     private Handler handler;
     private TextView tv, tv_score, combo;
     private int score2 = 0;
@@ -35,7 +35,7 @@ public class PlayActivity extends Activity {
     private int goodcnt = 0;
     private int misscnt = 0;
     private int maxcom = 0;
-    private int perfectcnt=0;
+    private int perfectcnt = 0;
     private ProgressBar bar;
     private Down down;
     private Note note;
@@ -67,6 +67,8 @@ public class PlayActivity extends Activity {
         iv_backbox3 = findViewById(R.id.iv_backbox3);
         iv_backbox4 = findViewById(R.id.iv_backbox4);
 
+        iv_setting = findViewById(R.id.iv_setting);
+
         loca = findViewById(R.id.loca);
         combo = findViewById(R.id.tv_combo);
         bar = findViewById(R.id.progress_1);
@@ -74,6 +76,13 @@ public class PlayActivity extends Activity {
         tv = findViewById(R.id.tv_hit);
         tv_score = findViewById(R.id.tv_score);
         score2 = 0;
+
+        iv_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                menuOn();
+            }
+        });
 
         Beat beat = new Beat();
         noteVOS = beat.list();
@@ -111,14 +120,12 @@ public class PlayActivity extends Activity {
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
 
                 } else if (msg.what == 5) {
-                    down.interrupt();
-                    note.interrupt();
                     if (misscnt == 0) {
 
-                        if(goodcnt==0){
-                            mm="Perfect";
+                        if (goodcnt == 0) {
+                            mm = "Perfect";
 
-                        }else{
+                        } else {
                             mm = "Full Combo";
                         }
 
@@ -127,7 +134,7 @@ public class PlayActivity extends Activity {
                         alertDialog = new AlertDialog.Builder(PlayActivity.this);
                         mp.stop();
 
-                        alertDialog.setTitle("연주완료     " + mm).setMessage("SCORE : " + score2 + "\n" + "PERFECT : " + perfectcnt + "\n" +"GOOD : " + goodcnt + "\n" + "MISS : " + misscnt + "\n" + "MAXCOMBO : " + maxcom)
+                        alertDialog.setTitle("연주완료     " + mm).setMessage("SCORE : " + score2 + "\n" + "PERFECT : " + perfectcnt + "\n" + "GOOD : " + goodcnt + "\n" + "MISS : " + misscnt + "\n" + "MAXCOMBO : " + maxcom)
                                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -166,19 +173,19 @@ public class PlayActivity extends Activity {
                             layout_play.getViewById(i).setY(y);
                             Log.d("아래",layout_play.getViewById(i).getTop()+"+++++"+layout_play.getViewById(i).getBottom()+"----"+layout_play.getViewById(i).getId());
                             if (y < btn_key1.getBottom() + 200) {
-                                if (y > loca.getTop() -100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
+                                if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
 
                                     hit1 = false;
                                     deldteNoteCnt++;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-                                    if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){ //퍼펙트판정
+                                    if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) { //퍼펙트판정
                                         perfectcnt++;
                                         score2 += 15;
                                         tv_score.setText("SCORE : " + score2);
                                         tv.setText("Perfect");
                                         com++;
                                         combo.setText(com + " combo");
-                                    }else {
+                                    } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
@@ -191,7 +198,8 @@ public class PlayActivity extends Activity {
                                     hit2 = false;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     deldteNoteCnt++;
-                                    if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){
+
+                                    if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
                                         perfectcnt++;
                                         score2 += 15;
 
@@ -199,7 +207,7 @@ public class PlayActivity extends Activity {
                                         tv.setText("Perfect");
                                         com++;
                                         combo.setText(com + " combo");
-                                    }else {
+                                    } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
@@ -219,7 +227,7 @@ public class PlayActivity extends Activity {
                                         tv.setText("Perfect");
                                         com++;
                                         combo.setText(com + " combo");
-                                    }else {
+                                    } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
@@ -231,14 +239,14 @@ public class PlayActivity extends Activity {
                                     hit4 = false;
                                     deldteNoteCnt++;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-                                    if(y > loca.getTop() - 10 && y < loca.getBottom() + 10){
+                                    if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
                                         perfectcnt++;
                                         score2 += 15;
                                         tv_score.setText("SCORE : " + score2);
                                         tv.setText("Perfect");
                                         com++;
                                         combo.setText(com + " combo");
-                                    }else {
+                                    } else {
                                         goodcnt++;
                                         score2 += 10;
                                         tv_score.setText("SCORE : " + score2);
@@ -406,6 +414,10 @@ public class PlayActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+        menuOn();
+    }
+
+    public void menuOn() {
         if (bar.getProgress() > 0) {
             mp.pause();
             note.setWait(true);
