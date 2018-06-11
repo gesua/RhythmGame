@@ -147,7 +147,7 @@ public class PlayActivity extends Activity {
                         if (layout_play.getViewById(i) != null) {
                             float y = layout_play.getViewById(i).getY();
                             if (y < btn_key1.getTop() + 150) {
-                                y += 15; //노트스피드
+                                y += 5; //노트스피드
                                 layout_play.getViewById(i).setY(y);
                                 if (y > loca.getTop() - 50 && y < loca.getBottom() + 300 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1)
                                 {

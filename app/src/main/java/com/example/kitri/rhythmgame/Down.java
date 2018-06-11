@@ -22,7 +22,7 @@ public class Down extends Thread {
 
                 handler.sendMessage(message);
 
-                Thread.sleep(10); // 프레임 1000/x
+                Thread.sleep(3); // 프레임 1000/x
 
             }
         } catch (InterruptedException e) {
