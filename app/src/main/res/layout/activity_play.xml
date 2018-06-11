@@ -165,31 +165,29 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progress_1" />
 
-    <ImageView
-        android:id="@+id/tv_combo_1"
-        android:layout_width="40dp"
-        android:layout_height="70dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/loca"
-        app:layout_constraintLeft_toRightOf="@+id/tv_combo_2"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/tv_combo_2"
-        android:layout_width="40dp"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toBottomOf="@+id/loca"
-        app:layout_constraintLeft_toRightOf="@+id/tv_combo_3"
-        app:layout_constraintRight_toLeftOf="@+id/tv_combo_1"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/tv_combo_3"
-        android:layout_width="40dp"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toBottomOf="@+id/loca"
-        app:layout_constraintRight_toLeftOf="@+id/tv_combo_2"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/tv_combo_3"
+            android:layout_width="40dp"
+            android:layout_height="70dp" />
+
+        <ImageView
+            android:id="@+id/tv_combo_2"
+            android:layout_width="40dp"
+            android:layout_height="70dp" />
+
+        <ImageView
+            android:id="@+id/tv_combo_1"
+            android:layout_width="40dp"
+            android:layout_height="70dp" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
