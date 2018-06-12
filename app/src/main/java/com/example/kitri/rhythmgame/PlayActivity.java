@@ -211,6 +211,7 @@ public class PlayActivity extends Activity {
                                         iv_hit.setImageResource(R.drawable.good);
                                         com++;
                                         numManager.setCombo(com);
+                                        
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
 
