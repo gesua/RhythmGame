@@ -52,7 +52,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_result_perfect"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_perfect">
 
@@ -78,7 +77,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/iv_result_good"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_perfect">
@@ -105,7 +103,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/iv_result_miss"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_perfect">
@@ -132,7 +129,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/iv_result_combo"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_perfect">
@@ -159,7 +155,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/iv_result_score"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_perfect">
@@ -193,9 +188,9 @@
         android:id="@+id/iv_result_clear"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="75dp"
         android:src="@drawable/game_clear"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_result_score"
+        app:layout_constraintBottom_toTopOf="@+id/iv_result_restart"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
