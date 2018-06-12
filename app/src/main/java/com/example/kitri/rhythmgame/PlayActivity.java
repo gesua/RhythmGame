@@ -49,6 +49,7 @@ public class PlayActivity extends Activity {
     private boolean hit2 = false;
     private boolean hit3 = false;
     private boolean hit4 = false;
+    private boolean mstart=false;
     private static MediaPlayer mp;
     private List<NoteVO> noteVOS = new ArrayList<>();
     private int deldteNoteCnt = 0;
@@ -83,6 +84,9 @@ public class PlayActivity extends Activity {
         iv_backbox4 = findViewById(R.id.iv_backbox4);
 
         iv_setting = findViewById(R.id.iv_setting);
+        iv_setting.setEnabled(false);
+
+
 
         loca = findViewById(R.id.loca);
         bar = findViewById(R.id.progress_1);
@@ -138,6 +142,8 @@ public class PlayActivity extends Activity {
                         e.printStackTrace();
                     }
                     mp.start();
+                    iv_setting.setEnabled(true);
+                    mstart=true;//노래시작 체크
                 }
 
                 // 노트 위치 세팅
@@ -211,7 +217,7 @@ public class PlayActivity extends Activity {
                                         iv_hit.setImageResource(R.drawable.good);
                                         com++;
                                         numManager.setCombo(com);
-                                        
+
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
 
@@ -453,13 +459,17 @@ public class PlayActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (bar.getProgress() > 0) {
-            mp.pause();
-            note.setWait(true);
-            down.setWait(true);
-            custom();
-        } else {
-            finish();
+        if(mstart) { //음악 재생 시작해야
+            if (bar.getProgress() > 0) {
+                mp.pause();
+                note.setWait(true);
+                down.setWait(true);
+                custom();
+            } else {
+                finish();
+            }
+        }else{
+            //암것도 동작안함
         }
     }
 
@@ -525,6 +535,6 @@ public class PlayActivity extends Activity {
             }
         });
         dialog.show();
-
+        dialog.setCancelable(false);
     }
 }
