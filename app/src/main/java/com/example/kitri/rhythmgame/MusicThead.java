@@ -18,13 +18,13 @@ public class MusicThead extends Thread {
 
         try {
             Thread.sleep(time); //노래시작 지연시간
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
 
         Message message =new Message();
         message.what=777;
         handler.sendMessage(message);
-
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

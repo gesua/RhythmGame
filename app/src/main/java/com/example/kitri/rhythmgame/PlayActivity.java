@@ -62,6 +62,7 @@ public class PlayActivity extends Activity {
     private boolean dupl = false;
     private int delay = 0;
     private int sync = 0;
+    private MusicThead musicThead;
 
 
     @Override
@@ -352,7 +353,7 @@ public class PlayActivity extends Activity {
         Log.d("숫자2", noteSpd + "dd");
         Log.d("숫자3", startTime + "dd");
 
-        MusicThead musicThead = new MusicThead(handler, startTime);
+        musicThead = new MusicThead(handler, startTime);
         musicThead.start();
 
         note.setWaitTime(startTime + 1000); //마지막노트 판정선 지나는시간+n초 여유 후 결과창 다이얼로그
@@ -543,6 +544,8 @@ public class PlayActivity extends Activity {
     protected void onPause() {
         down.interrupt();
         note.interrupt();
+        musicThead.interrupt();
+        mp.stop();
         finish();
         super.onPause();
 
