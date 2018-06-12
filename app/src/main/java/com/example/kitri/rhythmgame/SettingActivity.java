@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class SettingActivity extends Activity {
     private EditText setSpd, setSync;
-    private Button ok, syncbtn;
+    private Button ok, no;
     private ImageView spdbtn1, spdbtn2, syncbtn1, syncbtn2;
 
     @Override
@@ -24,7 +24,7 @@ public class SettingActivity extends Activity {
         setSpd = findViewById(R.id.spd_edit);
         ok = findViewById(R.id.ok);
         setSync = findViewById(R.id.sync_edit2);
-        syncbtn = findViewById(R.id.ok2);
+        no = findViewById(R.id.ok2);
         spdbtn1 = findViewById(R.id.backimg);
         spdbtn2 = findViewById(R.id.forimg);
         syncbtn1 = findViewById(R.id.backimg2);
@@ -107,12 +107,15 @@ public class SettingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 try {
-                    if (Integer.parseInt(setSpd.getText().toString()) > 0 && Integer.parseInt(setSpd.getText().toString()) < 16) { //1~15까지만 DB업데이트
+                    if (Integer.parseInt(setSpd.getText().toString()) > 0 && Integer.parseInt(setSpd.getText().toString()) < 16 && Integer.parseInt(setSync.getText().toString()) > 0 && Integer.parseInt(setSync.getText().toString()) < 13) {
                         String ss = setSpd.getText().toString().trim();
+                        String sy =setSync.getText().toString().trim();
                         int sss = Integer.parseInt(ss) * 5;
 
+
                         setDB.update(sss + "");
-                        Toast.makeText(SettingActivity.this, "속도 : " + (sss / 5), Toast.LENGTH_SHORT).show();
+                        setDB.updateS(sy);
+                        Toast.makeText(SettingActivity.this, "속도 : " + (sss / 5) +" / " + "싱크 : "+setSync.getText().toString(), Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
                         Toast.makeText(SettingActivity.this, "1~15이내로 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -124,6 +127,12 @@ public class SettingActivity extends Activity {
             }
         });
 
+        no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         setSpd.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -137,23 +146,7 @@ public class SettingActivity extends Activity {
             }
         });
 
-        syncbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if (Integer.parseInt(setSync.getText().toString()) > 0 && Integer.parseInt(setSync.getText().toString()) < 13) { //1~12까지만 싱크조절
-                        String ss = setSync.getText().toString().trim();
-                        setDB.updateS(ss);
-                        Toast.makeText(SettingActivity.this, "싱크 : " + ss, Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(SettingActivity.this, "1~12이내로 입력해주세요", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (NumberFormatException e) {
-                    Toast.makeText(SettingActivity.this, "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
 
         setSync.setOnKeyListener(new View.OnKeyListener() {
             @Override

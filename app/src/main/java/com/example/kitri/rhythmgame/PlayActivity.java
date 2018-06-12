@@ -55,9 +55,9 @@ public class PlayActivity extends Activity {
     private double startT = 0;
     private int startTime = 0;
     private List<Integer> deleteNoteList = new ArrayList<>();
-    private boolean dupl=false;
-    private int delay=0;
-    private int sync=0;
+    private boolean dupl = false;
+    private int delay = 0;
+    private int sync = 0;
 
 
     @Override
@@ -90,10 +90,10 @@ public class PlayActivity extends Activity {
 
         get = getIntent();
         String lp = get.getStringExtra("111");
-        String sy=setDB.selectS();
-        sync=Integer.parseInt(sy.trim());
+        String sy = setDB.selectS();
+        sync = Integer.parseInt(sy.trim());
 
-        delay=noteSpd*sync+20;
+        delay = noteSpd * sync + 20;
 
 
         if (lp != null) {
@@ -194,14 +194,14 @@ public class PlayActivity extends Activity {
 
                     for (int i = 0; i < noteVOS.size(); i++) {
 
-                        for(int y=0; y<deleteNoteList.size(); y++){
-                            if(deleteNoteList.get(y)==i){
-                                dupl=true;
+                        for (int y = 0; y < deleteNoteList.size(); y++) {
+                            if (deleteNoteList.get(y) == i) {
+                                dupl = true;
                             }
                         }
 
-                        if(dupl){
-                            dupl=false;
+                        if (dupl) {
+                            dupl = false;
                             continue; //이미 판정 끝난노트일시 컨티뉴
 
                         }
@@ -210,13 +210,13 @@ public class PlayActivity extends Activity {
                             float y = layout_play.getViewById(i).getY();
                             y += noteSpd; //노트스피드 기본 25 최소5 최대 75 (설정창에서는 /5해서 1~15
                             layout_play.getViewById(i).setY(y);
-                            if (y < loca.getBottom()+100) {
-                                if (y > loca.getTop() - 150 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
+                            if (y < loca.getBottom()) {
+                                if (y > loca.getTop() - 150 && y < loca.getBottom() && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
 
                                     hit1 = false;
                                     deleteNoteList.add(i);
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-                                    if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) { //퍼펙트판정
+                                    if (y > loca.getTop() + 10 && y < loca.getBottom() - 10) { //퍼펙트판정
                                         perfectcnt++;
                                         score2 += 15;
                                         numManager.setScore(score2);
@@ -233,12 +233,12 @@ public class PlayActivity extends Activity {
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
 
-                                } else if (y > loca.getTop() - 150 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
+                                } else if (y > loca.getTop() - 150 && y < loca.getBottom() && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
                                     hit2 = false;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     deleteNoteList.add(i);
 
-                                    if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
+                                    if (y > loca.getTop() + 10 && y < loca.getBottom() - 10) {
                                         perfectcnt++;
                                         score2 += 15;
 
@@ -255,12 +255,12 @@ public class PlayActivity extends Activity {
                                         numManager.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
-                                } else if (y > loca.getTop() - 150 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
+                                } else if (y > loca.getTop() - 150 && y < loca.getBottom() && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     hit3 = false;
                                     deleteNoteList.add(i);
-                                    if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
+                                    if (y > loca.getTop() + 10 && y < loca.getBottom() - 10) {
                                         perfectcnt++;
                                         score2 += 15;
                                         numManager.setScore(score2);
@@ -276,11 +276,11 @@ public class PlayActivity extends Activity {
                                         numManager.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
-                                } else if (y > loca.getTop() - 150 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
+                                } else if (y > loca.getTop() - 150 && y < loca.getBottom() && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
                                     hit4 = false;
                                     deleteNoteList.add(i);
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-                                    if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
+                                    if (y > loca.getTop() + 10 && y < loca.getBottom() - 10) {
                                         perfectcnt++;
                                         score2 += 15;
                                         numManager.setScore(score2);
@@ -306,7 +306,8 @@ public class PlayActivity extends Activity {
                                     deleteNoteList.add(i);
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     if (bar.getProgress() > 0) {
-                                        bar.setProgress(bar.getProgress() - 1); //미스 1당 체력바 감소량
+                                        bar.setProgress(bar.getProgress() - 3
+                                        ); //미스 1당 체력바 감소량
                                     } else {
                                         down.interrupt();
                                         note.interrupt();
@@ -357,7 +358,7 @@ public class PlayActivity extends Activity {
         note = new Note(layout_play, handler, noteVOS);
         note.start();
 
-        startT = ((double) lineP / (double) noteSpd) / 50 * 1000;
+        startT = ((double) lineP / (double) noteSpd) / 50 * 1000; //단위가 ms니까 *1000해줌
         startTime = (int) startT + note.getSetNoteTime(); //노트시작후 n초 후 결과값(노트가 화면 맨위에서 판정선까지 닿는데 걸리는 시간)+노트시작값(=첫노트 나오는시간)
         Log.d("타임2", lineP + "dd");
         Log.d("타임3", noteSpd + "dd");
