@@ -537,4 +537,16 @@ public class PlayActivity extends Activity {
         dialog.show();
         dialog.setCancelable(false);
     }
+
+
+    @Override
+    protected void onPause() {
+        down.interrupt();
+        note.interrupt();
+        finish();
+        super.onPause();
+
+    }
+
 }
+

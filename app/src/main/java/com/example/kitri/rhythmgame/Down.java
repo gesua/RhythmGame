@@ -23,7 +23,7 @@ public class Down extends Thread {
         try {
             while (next) {
                 while (wait){
-                    Thread.sleep(1000);
+                    Thread.sleep(1);
                     //일시정지 하면 대기
                 }
                 Message message = new Message();
