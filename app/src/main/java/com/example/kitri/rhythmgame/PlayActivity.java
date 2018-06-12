@@ -56,6 +56,8 @@ public class PlayActivity extends Activity {
     private int startTime = 0;
     private List<Integer> deleteNoteList = new ArrayList<>();
     private boolean dupl=false;
+    private int delay=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +90,10 @@ public class PlayActivity extends Activity {
         get = getIntent();
         String lp = get.getStringExtra("111");
 
+        delay=noteSpd*4+20;
+
         if (lp != null) {
-            lineP = Integer.parseInt(lp) - 100;
+            lineP = Integer.parseInt(lp) - delay;
             Log.d("숫자", lineP + "dd");
         }
 
