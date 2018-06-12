@@ -83,8 +83,24 @@ public class ResultActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(), PlayActivity.class);
                 intent.putExtra("333",lineP+"");
                 startActivity(intent);
+                finish();
+
+
             }
         });
 
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, 0);
     }
 }
