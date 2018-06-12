@@ -54,7 +54,6 @@
         app:layout_constraintLeft_toRightOf="@+id/btn_key3"
         app:layout_constraintRight_toRightOf="parent" />
 
-
     <ImageView
         android:id="@+id/iv_hit_bar"
         android:layout_width="0dp"
@@ -74,7 +73,6 @@
         app:layout_constraintLeft_toLeftOf="@+id/btn_key1"
         app:layout_constraintRight_toRightOf="@+id/btn_key1"
         app:layout_constraintTop_toTopOf="@+id/iv_hit_bar" />
-
 
     <ImageView
         android:id="@+id/iv_backbox1"
@@ -137,27 +135,57 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_score"
+    <LinearLayout
+        android:id="@+id/layout_score"
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_margin="10dp"
-        android:text="SCORE : 999999999999999"
-        android:textSize="18sp"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/iv_setting"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/score" />
+
+        <ImageView
+            android:id="@+id/iv_score_4"
+            android:layout_width="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp" />
+
+        <ImageView
+            android:id="@+id/iv_score_3"
+            android:layout_width="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp" />
+
+        <ImageView
+            android:id="@+id/iv_score_2"
+            android:layout_width="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp" />
+
+        <ImageView
+            android:id="@+id/iv_score_1"
+            android:layout_width="12dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progress_1"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="15dp"
-        android:layout_marginRight="20sp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
         android:progress="100"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_score"
+        app:layout_constraintLeft_toLeftOf="@+id/layout_score"
         app:layout_constraintRight_toLeftOf="@+id/iv_setting"
-        app:layout_constraintTop_toBottomOf="@+id/tv_score" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_score" />
 
     <ImageView
         android:id="@+id/iv_hit"

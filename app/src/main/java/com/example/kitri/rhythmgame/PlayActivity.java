@@ -29,8 +29,7 @@ public class PlayActivity extends Activity {
     private Button btn_key1, btn_key2, btn_key3, btn_key4;
     private ImageView iv_backbox1, iv_backbox2, iv_backbox3, iv_backbox4, loca, iv_setting, iv_hit;
     private Handler handler;
-    private TextView tv_score;
-    private Combo combo;
+    private NumManager numManager;
     private int score2 = 0;
     private int com = 0;
     private int goodcnt = 0;
@@ -81,10 +80,9 @@ public class PlayActivity extends Activity {
 
         loca = findViewById(R.id.loca);
         bar = findViewById(R.id.progress_1);
-        combo = new Combo(this);
+        numManager = new NumManager(this);
 
         iv_hit = findViewById(R.id.iv_hit);
-        tv_score = findViewById(R.id.tv_score);
         score2 = 0;
 
         get = getIntent();
@@ -106,7 +104,7 @@ public class PlayActivity extends Activity {
         Beat beat = new Beat();
         noteVOS = beat.list();
 
-        tv_score.setText("SCORE : 0");
+        numManager.setScore(0);
         handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -123,19 +121,19 @@ public class PlayActivity extends Activity {
                 // 노트 위치 세팅
                 if (msg.what == 1) {
                     ((ImageView) msg.obj).setX(btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2));
-                    ((ImageView) msg.obj).setY(msg.arg2);
+                    ((ImageView) msg.obj).setY(bar.getBottom());
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
                 } else if (msg.what == 2) {
                     ((ImageView) msg.obj).setX(btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2));
-                    ((ImageView) msg.obj).setY(msg.arg2);
+                    ((ImageView) msg.obj).setY(bar.getBottom());
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
                 } else if (msg.what == 3) {
                     ((ImageView) msg.obj).setX(btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2));
-                    ((ImageView) msg.obj).setY(msg.arg2);
+                    ((ImageView) msg.obj).setY(bar.getBottom());
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
                 } else if (msg.what == 4) {
                     ((ImageView) msg.obj).setX(btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2));
-                    ((ImageView) msg.obj).setY(msg.arg2);
+                    ((ImageView) msg.obj).setY(bar.getBottom());
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
 
                 } else if (msg.what == 5) {
@@ -213,17 +211,17 @@ public class PlayActivity extends Activity {
                                     if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) { //퍼펙트판정
                                         perfectcnt++;
                                         score2 += 15;
-                                        tv_score.setText("SCORE : " + score2);
+                                        numManager.setScore(score2);
                                         iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
-                                        combo.setCombo(com);
+                                        numManager.setCombo(com);
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
-                                        tv_score.setText("SCORE : " + score2);
+                                        numManager.setScore(score2);
                                         iv_hit.setImageResource(R.drawable.good);
                                         com++;
-                                        combo.setCombo(com);
+                                        numManager.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
 
@@ -236,17 +234,17 @@ public class PlayActivity extends Activity {
                                         perfectcnt++;
                                         score2 += 15;
 
-                                        tv_score.setText("SCORE : " + score2);
+                                        numManager.setScore(score2);
                                         iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
-                                        combo.setCombo(com);
+                                        numManager.setCombo(com);
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
-                                        tv_score.setText("SCORE : " + score2);
+                                        numManager.setScore(score2);
                                         iv_hit.setImageResource(R.drawable.good);
                                         com++;
-                                        combo.setCombo(com);
+                                        numManager.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
@@ -257,17 +255,17 @@ public class PlayActivity extends Activity {
                                     if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
                                         perfectcnt++;
                                         score2 += 15;
-                                        tv_score.setText("SCORE : " + score2);
+                                        numManager.setScore(score2);
                                         iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
-                                        combo.setCombo(com);
+                                        numManager.setCombo(com);
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
-                                        tv_score.setText("SCORE : " + score2);
+                                        numManager.setScore(score2);
                                         iv_hit.setImageResource(R.drawable.good);
                                         com++;
-                                        combo.setCombo(com);
+                                        numManager.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
                                 } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
@@ -277,17 +275,17 @@ public class PlayActivity extends Activity {
                                     if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
                                         perfectcnt++;
                                         score2 += 15;
-                                        tv_score.setText("SCORE : " + score2);
+                                        numManager.setScore(score2);
                                         iv_hit.setImageResource(R.drawable.perfect);
                                         com++;
-                                        combo.setCombo(com);
+                                        numManager.setCombo(com);
                                     } else {
                                         goodcnt++;
                                         score2 += 10;
-                                        tv_score.setText("SCORE : " + score2);
+                                        numManager.setScore(score2);
                                         iv_hit.setImageResource(R.drawable.good);
                                         com++;
-                                        combo.setCombo(com);
+                                        numManager.setCombo(com);
 
                                     }
                                     layout_play.getViewById(i).setY(y + 500); //판정되면 바로 밑으로 내려가버리게
@@ -311,7 +309,7 @@ public class PlayActivity extends Activity {
                                     misscnt++;
                                     iv_hit.setImageResource(R.drawable.miss);
                                     com = 0;
-                                    combo.setCombo(com);
+                                    numManager.setCombo(com);
                                 }
 
                             }
