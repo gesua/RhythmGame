@@ -2,8 +2,11 @@ package com.example.kitri.rhythmgame;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +16,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -101,14 +105,21 @@ public class PlayActivity extends Activity {
         }
 
         String relp = get.getStringExtra("333"); //음악 시작타이밍 잡기위한 값
-        if(relp!=null) {
+        if (relp != null) {
             lineP = Integer.parseInt(relp.trim());
         }
 
         iv_setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                menuOn();
+                if (bar.getProgress() > 0) {
+                    mp.pause();
+                    note.setWait(true);
+                    down.setWait(true);
+                    custom();
+                } else {
+                    finish();
+                }
             }
         });
 
@@ -180,13 +191,13 @@ public class PlayActivity extends Activity {
                             float y = layout_play.getViewById(i).getY();
                             y += noteSpd; //노트스피드 기본 25 최소5 최대 75 (설정창에서는 /5해서 1~15
                             layout_play.getViewById(i).setY(y);
-                            if (y < loca.getBottom()) {
-                                if (y > loca.getTop() - 150 && y < loca.getBottom() && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
+                            if (y < loca.getBottom()+100) {
+                                if (y > loca.getTop() - 150 && y < loca.getBottom()+100 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
 
                                     hit1 = false;
                                     deleteNoteList.add(i);
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-                                    if (y > loca.getTop() + 10 && y < loca.getBottom() - 10) { //퍼펙트판정
+                                    if (y > loca.getTop() -30 && y < loca.getBottom() +30) { //퍼펙트판정
                                         perfectcnt++;
                                         score2 += 15;
                                         numManager.setScore(score2);
@@ -203,12 +214,12 @@ public class PlayActivity extends Activity {
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
 
-                                } else if (y > loca.getTop() - 150 && y < loca.getBottom() && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
+                                } else if (y > loca.getTop() - 150 && y < loca.getBottom()+100 && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
                                     hit2 = false;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     deleteNoteList.add(i);
 
-                                    if (y > loca.getTop() + 10 && y < loca.getBottom() - 10) {
+                                    if (y > loca.getTop() -30 && y < loca.getBottom() +30) {
                                         perfectcnt++;
                                         score2 += 15;
 
@@ -225,12 +236,12 @@ public class PlayActivity extends Activity {
                                         numManager.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
-                                } else if (y > loca.getTop() - 150 && y < loca.getBottom() && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
+                                } else if (y > loca.getTop() - 150 && y < loca.getBottom()+100 && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     hit3 = false;
                                     deleteNoteList.add(i);
-                                    if (y > loca.getTop() + 10 && y < loca.getBottom() - 10) {
+                                    if (y > loca.getTop() + -30 && y < loca.getBottom() + 30) {
                                         perfectcnt++;
                                         score2 += 15;
                                         numManager.setScore(score2);
@@ -246,11 +257,11 @@ public class PlayActivity extends Activity {
                                         numManager.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
-                                } else if (y > loca.getTop() - 150 && y < loca.getBottom() && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
+                                } else if (y > loca.getTop() - 150 && y < loca.getBottom()+100 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
                                     hit4 = false;
                                     deleteNoteList.add(i);
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-                                    if (y > loca.getTop() + 10 && y < loca.getBottom() - 10) {
+                                    if (y > loca.getTop() - 30 && y < loca.getBottom() + 30) {
                                         perfectcnt++;
                                         score2 += 15;
                                         numManager.setScore(score2);
@@ -441,42 +452,16 @@ public class PlayActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        menuOn();
-    }
-
-    public void menuOn() {
         if (bar.getProgress() > 0) {
             mp.pause();
             note.setWait(true);
             down.setWait(true);
-            final AlertDialog alertDialog = new AlertDialog.Builder(this)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle("설정")
-                    .setPositiveButton("종료", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            down.interrupt();
-                            note.interrupt();
-                            finish();
-
-                        }
-                    })
-                    .setNegativeButton("계속하기", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            down.setWait(false);
-                            note.setWait(false);
-                            mp.start();
-
-                        }
-                    })
-                    .show();
-            alertDialog.setCancelable(false);
-
+            custom();
         } else {
             finish();
         }
     }
+
 
     // 결과창 띄움
     void resultOn(Activity context, boolean clear) {
@@ -487,9 +472,58 @@ public class PlayActivity extends Activity {
         intent.putExtra("miss", misscnt);
         intent.putExtra("combo", maxcom);
         intent.putExtra("clear", clear);
-        intent.putExtra("222",lineP+"");
+        intent.putExtra("222", lineP + "");
         startActivity(intent);
 
         finish();
+    }
+
+    public void custom() {
+        final Dialog dialog = new Dialog(PlayActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.pause);
+
+        ImageView exit = dialog.findViewById(R.id.iv_pause_exit);
+        ImageView conti = dialog.findViewById(R.id.iv_pause_continue);
+        ImageView rest = dialog.findViewById(R.id.iv_pause_restart);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                note.interrupt();
+                down.interrupt();
+                mp.stop();
+                finish();
+                dialog.dismiss();
+            }
+        });
+
+        conti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                down.setWait(false);
+                note.setWait(false);
+                mp.start();
+                dialog.cancel();
+            }
+        });
+
+        rest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                down.interrupt();
+                note.interrupt();
+                Intent intent = new Intent(getApplicationContext(), PlayActivity.class);
+                intent.putExtra("333", lineP + "");
+                startActivity(intent);
+                finish();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
     }
 }
