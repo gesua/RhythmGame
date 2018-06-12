@@ -127,9 +127,9 @@
 
     <ImageView
         android:id="@+id/iv_setting"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="10dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="5dp"
         android:src="@drawable/pause_circle"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -180,7 +180,7 @@
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="15dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:progress="100"
         app:layout_constraintLeft_toLeftOf="@+id/layout_score"
