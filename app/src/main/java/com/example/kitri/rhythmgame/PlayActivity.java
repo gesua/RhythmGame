@@ -97,9 +97,13 @@ public class PlayActivity extends Activity {
 
         if (lp != null) {
             lineP = Integer.parseInt(lp) - delay;
-            Log.d("숫자", lineP + "dd");
+
         }
 
+        String relp = get.getStringExtra("333"); //음악 시작타이밍 잡기위한 값
+        if(relp!=null) {
+            lineP = Integer.parseInt(relp.trim());
+        }
 
         iv_setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -483,6 +487,7 @@ public class PlayActivity extends Activity {
         intent.putExtra("miss", misscnt);
         intent.putExtra("combo", maxcom);
         intent.putExtra("clear", clear);
+        intent.putExtra("222",lineP+"");
         startActivity(intent);
 
         finish();

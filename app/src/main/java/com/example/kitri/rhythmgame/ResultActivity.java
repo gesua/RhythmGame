@@ -4,17 +4,21 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class ResultActivity extends Activity {
     private ResultNumManager resultNumManager = new ResultNumManager();
-
     private ImageView ivResultClear;
     private ImageView[] ivResultPerfect = new ImageView[3];
     private ImageView[] ivResultGood = new ImageView[3];
     private ImageView[] ivResultMiss = new ImageView[3];
     private ImageView[] ivResultCombo = new ImageView[3];
     private ImageView[] ivResultScore = new ImageView[4];
+    private int lineP=0;
+
+    private ImageView iv_restart,iv_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,6 +26,8 @@ public class ResultActivity extends Activity {
         setContentView(R.layout.activity_result);
 
         ivResultClear = findViewById(R.id.iv_result_clear);
+        iv_restart=findViewById(R.id.iv_result_restart);
+        iv_back=findViewById(R.id.iv_result_back);
 
         ivResultPerfect[0] = findViewById(R.id.iv_result_perfect_num_1);
         ivResultPerfect[1] = findViewById(R.id.iv_result_perfect_num_2);
@@ -51,6 +57,7 @@ public class ResultActivity extends Activity {
         int combo = get.getIntExtra("combo", -1);
         int score = get.getIntExtra("score", -1);
         boolean clear = get.getBooleanExtra("clear", false);
+        lineP=Integer.parseInt(get.getStringExtra("222").trim());
 
         // 클리어 및 풀콤보 표시
         if (clear == false) {
@@ -69,5 +76,15 @@ public class ResultActivity extends Activity {
         resultNumManager.setResult(ivResultMiss, miss);
         resultNumManager.setResult(ivResultCombo, combo);
         resultNumManager.setResult(ivResultScore, score);
+
+        iv_restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), PlayActivity.class);
+                intent.putExtra("333",lineP+"");
+                startActivity(intent);
+            }
+        });
+
     }
 }
