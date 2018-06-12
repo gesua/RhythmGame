@@ -156,7 +156,7 @@ public class Beat {
                 voList.add(new NoteVO(400, 3));
                 voList.add(new NoteVO(100, 4));
                 voList.add(new NoteVO(100, 2));
-                voList.add(new NoteVO(400, 3));
+                voList.add(new NoteVO(500, 3));
 //15
                 voList.add(new NoteVO(100, 4));
                 voList.add(new NoteVO(100, 3));
