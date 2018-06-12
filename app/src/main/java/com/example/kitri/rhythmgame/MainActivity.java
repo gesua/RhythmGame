@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
                 int lp = line.getTop();
                 intent.putExtra("111", lp + "");
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -35,6 +36,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
 
             }
         });

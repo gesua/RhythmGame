@@ -22,13 +22,15 @@ public class Down extends Thread {
     public void run() {
         try {
             while (next) {
+                while (wait){
+                    Thread.sleep(500);
+                    //일시정지 하면 대기
+                }
                 Message message = new Message();
                 message.what = 999;
 
                 handler.sendMessage(message);
-                while (wait){
-                    //일시정지 하면 대기
-                }
+
 
                 Thread.sleep(20); // 프레임 1000/x
 
