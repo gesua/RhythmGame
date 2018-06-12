@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends Activity {
     private Button btnStart,btnSet;
+    private ImageView line;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,11 +18,14 @@ public class MainActivity extends Activity {
 
         btnStart = findViewById(R.id.btn_start);
         btnSet = findViewById(R.id.btn_setting);
+        line=findViewById(R.id.hitLine);
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PlayActivity.class);
+                int lp=line.getTop();
+                intent.putExtra("111",lp+"");
                 startActivity(intent);
             }
         });
@@ -28,6 +33,8 @@ public class MainActivity extends Activity {
         btnSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent);
 
             }
         });

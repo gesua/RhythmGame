@@ -19,7 +19,8 @@
     <Button
         android:id="@+id/btn_key1"
         android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_height="95dp"
+        android:layout_marginLeft="20sp"
         android:background="@drawable/button_img"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -28,7 +29,7 @@
     <Button
         android:id="@+id/btn_key2"
         android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_height="95dp"
         android:background="@drawable/button_img"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btn_key1"
@@ -37,7 +38,7 @@
     <Button
         android:id="@+id/btn_key3"
         android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_height="95dp"
         android:background="@drawable/button_img"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btn_key2"
@@ -46,7 +47,8 @@
     <Button
         android:id="@+id/btn_key4"
         android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_height="95dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/button_img"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/btn_key3"
@@ -80,7 +82,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/button_effect"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key1"
+        app:layout_constraintBottom_toBottomOf="@id/iv_hit_bar"
         app:layout_constraintLeft_toLeftOf="@+id/btn_key1"
         app:layout_constraintRight_toRightOf="@+id/btn_key1"
         app:layout_constraintTop_toTopOf="parent" />
@@ -93,7 +95,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/button_effect"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key2"
+        app:layout_constraintBottom_toBottomOf="@id/iv_hit_bar"
         app:layout_constraintLeft_toLeftOf="@+id/btn_key2"
         app:layout_constraintRight_toRightOf="@+id/btn_key2"
         app:layout_constraintTop_toTopOf="parent" />
@@ -106,7 +108,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/button_effect"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key3"
+        app:layout_constraintBottom_toBottomOf="@id/iv_hit_bar"
         app:layout_constraintLeft_toLeftOf="@+id/btn_key3"
         app:layout_constraintRight_toRightOf="@+id/btn_key3"
         app:layout_constraintTop_toTopOf="parent" />
@@ -119,7 +121,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/button_effect"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/btn_key4"
+        app:layout_constraintBottom_toBottomOf="@id/iv_hit_bar"
         app:layout_constraintLeft_toLeftOf="@+id/btn_key4"
         app:layout_constraintRight_toRightOf="@+id/btn_key4"
         app:layout_constraintTop_toTopOf="parent" />

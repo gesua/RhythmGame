@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,11 +49,20 @@ public class PlayActivity extends Activity {
     private static MediaPlayer mp;
     private List<NoteVO> noteVOS = new ArrayList<>();
     private int deldteNoteCnt = 0;
+    private Intent get;
+    private int lineP = 0;
+    private int noteSpd = 0;
+    private double startT = 0;
+    private int startTime = 0;
+    private List<Integer> deleteNoteList = new ArrayList<>();
+    private boolean dupl=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
+        SetDB setDB = new SetDB(PlayActivity.this);
+        noteSpd = Integer.parseInt(setDB.select());
 
         layout_play = findViewById(R.id.layout_play);
 
@@ -74,6 +84,15 @@ public class PlayActivity extends Activity {
 
         iv_hit = findViewById(R.id.iv_hit);
         score2 = 0;
+
+        get = getIntent();
+        String lp = get.getStringExtra("111");
+
+        if (lp != null) {
+            lineP = Integer.parseInt(lp) - 100;
+            Log.d("숫자", lineP + "dd");
+        }
+
 
         iv_setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +165,7 @@ public class PlayActivity extends Activity {
                                     public void onClick(DialogInterface dialog, int which) {
 
                                         Intent intent = new Intent(getApplicationContext(), PlayActivity.class);
+                                        intent.putExtra("111", (lineP + 100) + "");
                                         startActivity(intent);
 
                                         dialog.cancel();
@@ -163,18 +183,30 @@ public class PlayActivity extends Activity {
                             layout_play.getViewById(j).setVisibility(View.GONE); //혹시 이미지 남아있으면 제거용
                         }
                     }
-                    for (int i = deldteNoteCnt; i < noteVOS.size(); i++) {
 
+                    for (int i = 0; i < noteVOS.size(); i++) {
+
+                        for(int y=0; y<deleteNoteList.size(); y++){
+                            if(deleteNoteList.get(y)==i){
+                                dupl=true;
+                            }
+                        }
+
+                        if(dupl){
+                            dupl=false;
+                            continue; //이미 판정 끝난노트일시 컨티뉴
+
+                        }
 
                         if (layout_play.getViewById(i) != null) {
                             float y = layout_play.getViewById(i).getY();
-                            y += 25; //노트스피드 기본 25 최소5 최대 50
+                            y += noteSpd; //노트스피드 기본 25 최소5 최대 75 (설정창에서는 /5해서 1~15
                             layout_play.getViewById(i).setY(y);
-                            if (y < btn_key1.getBottom() + 200) {
-                                if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
+                            if (y < loca.getBottom()+100) {
+                                if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
 
                                     hit1 = false;
-                                    deldteNoteCnt++;
+                                    deleteNoteList.add(i);
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) { //퍼펙트판정
                                         perfectcnt++;
@@ -193,10 +225,10 @@ public class PlayActivity extends Activity {
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
 
-                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
+                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key2.getX() + (btn_key2.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit2) {
                                     hit2 = false;
                                     layout_play.getViewById(i).setVisibility(View.GONE);
-                                    deldteNoteCnt++;
+                                    deleteNoteList.add(i);
 
                                     if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
                                         perfectcnt++;
@@ -215,11 +247,11 @@ public class PlayActivity extends Activity {
                                         numManager.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
-                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
+                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key3.getX() + (btn_key3.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit3) {
 
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     hit3 = false;
-                                    deldteNoteCnt++;
+                                    deleteNoteList.add(i);
                                     if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
                                         perfectcnt++;
                                         score2 += 15;
@@ -236,9 +268,9 @@ public class PlayActivity extends Activity {
                                         numManager.setCombo(com);
                                     }
                                     layout_play.getViewById(i).setY(y + 500);
-                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 200 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
+                                } else if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key4.getX() + (btn_key4.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit4) {
                                     hit4 = false;
-                                    deldteNoteCnt++;
+                                    deleteNoteList.add(i);
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     if (y > loca.getTop() - 10 && y < loca.getBottom() + 10) {
                                         perfectcnt++;
@@ -262,8 +294,8 @@ public class PlayActivity extends Activity {
                                 }
 
                             } else { //미스 판정
-                                if (layout_play.getViewById(i).getVisibility() != View.GONE) {
-                                    deldteNoteCnt++;
+                                if (layout_play.getViewById(i).getVisibility() == View.VISIBLE) {
+                                    deleteNoteList.add(i);
                                     layout_play.getViewById(i).setVisibility(View.GONE);
                                     if (bar.getProgress() > 0) {
                                         bar.setProgress(bar.getProgress() - 1); //미스 1당 체력바 감소량
@@ -298,12 +330,9 @@ public class PlayActivity extends Activity {
             }
         };
 
-        mp = MediaPlayer.create(this, R.raw.romance);
+        mp = MediaPlayer.create(this, R.raw.romancecut);
 
-        mp.setLooping(true);
-
-        MusicThead musicThead = new MusicThead(handler);
-        musicThead.start();
+//        mp.setLooping(true);
 
 
         for (int i = 0; i < noteVOS.size(); i++) {
@@ -320,8 +349,19 @@ public class PlayActivity extends Activity {
         note = new Note(layout_play, handler, noteVOS);
         note.start();
 
+        startT = ((double) lineP / (double) noteSpd) / 50 * 1000;
+        startTime = (int) startT + note.getSetNoteTime(); //노트시작후 n초 후 결과값(노트가 화면 맨위에서 판정선까지 닿는데 걸리는 시간)+노트시작값(=첫노트 나오는시간)
+        Log.d("숫자2", noteSpd + "dd");
+        Log.d("숫자3", startTime + "dd");
+
+        MusicThead musicThead = new MusicThead(handler, startTime);
+        musicThead.start();
+
+        note.setWaitTime(startTime + 3000); //마지막노트 판정선 지나는시간+3초 여유 후 결과창 다이얼로그
+
         down = new Down(handler);
         down.start();
+
 
         btn_key1.setOnTouchListener(new View.OnTouchListener() {
             @Override
