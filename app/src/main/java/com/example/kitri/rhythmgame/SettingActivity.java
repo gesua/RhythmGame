@@ -43,32 +43,44 @@ public class SettingActivity extends Activity {
                         int sss=Integer.parseInt(ss)*5;
 
                         setDB.update(sss+"");
+                        Toast.makeText(SettingActivity.this, "속도 : "+(sss/5), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(SettingActivity.this, "1~15이내로 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
                 }catch (NumberFormatException e){
                     Toast.makeText(SettingActivity.this, "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
+                finish();
             }
         });
 
         setSpd.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                try {
-                    if (Integer.parseInt(setSpd.getText().toString()) > 0 && Integer.parseInt(setSpd.getText().toString()) < 16) { //1~15까지만 DB업데이트
-                        String ss=setSpd.getText().toString().trim();
-                        int sss=Integer.parseInt(ss)*5;
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == android.view.KeyEvent.KEYCODE_ENTER) {
 
-                        setDB.update(sss+"");
-                    } else {
-                        Toast.makeText(SettingActivity.this, "1~15이내로 입력해주세요", Toast.LENGTH_SHORT).show();
+                    try {
+                        if (Integer.parseInt(setSpd.getText().toString()) > 0 && Integer.parseInt(setSpd.getText().toString()) < 16) { //1~15까지만 DB업데이트
+                            String ss=setSpd.getText().toString().trim();
+                            int sss=Integer.parseInt(ss)*5;
+
+                            setDB.update(sss+"");
+                            Toast.makeText(SettingActivity.this, "속도 : "+(sss/5), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(SettingActivity.this, "1~15이내로 입력해주세요", Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (NumberFormatException e){
+                        Toast.makeText(SettingActivity.this, "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
-                }catch (NumberFormatException e){
-                    Toast.makeText(SettingActivity.this, "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 return false;
             }
         });
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, 0);
     }
 }

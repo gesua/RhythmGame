@@ -351,8 +351,9 @@ public class PlayActivity extends Activity {
 
         startT = ((double) lineP / (double) noteSpd) / 50 * 1000;
         startTime = (int) startT + note.getSetNoteTime(); //노트시작후 n초 후 결과값(노트가 화면 맨위에서 판정선까지 닿는데 걸리는 시간)+노트시작값(=첫노트 나오는시간)
-        Log.d("숫자2", noteSpd + "dd");
-        Log.d("숫자3", startTime + "dd");
+        Log.d("타임2", lineP + "dd");
+        Log.d("타임3", noteSpd + "dd");
+        Log.d("타임4", startTime + "dd");
 
         MusicThead musicThead = new MusicThead(handler, startTime);
         musicThead.start();

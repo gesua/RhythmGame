@@ -3,6 +3,7 @@ package com.example.kitri.rhythmgame;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,7 +27,9 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(MainActivity.this, PlayActivity.class);
                 int lp=line.getTop();
                 intent.putExtra("111",lp+"");
+                Log.d("타임",lp+"pt");
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -35,6 +38,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
 
             }
         });
