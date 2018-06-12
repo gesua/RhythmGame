@@ -91,6 +91,7 @@ public class PlayActivity extends Activity {
         String lp = get.getStringExtra("111");
 
         delay=noteSpd*4+20;
+        
 
         if (lp != null) {
             lineP = Integer.parseInt(lp) - delay;
