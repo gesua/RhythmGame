@@ -43,7 +43,7 @@ public class Note extends Thread {
             Thread.sleep(setNoteTime); //시작시 첫노트 대기시간
             for (int i = 0; i < number.size(); i++) { //size=노트개수
                 while(wait){
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 }
                 Message msg = new Message();
                 msg.what = number.get(i).getType(); //노트 라인
