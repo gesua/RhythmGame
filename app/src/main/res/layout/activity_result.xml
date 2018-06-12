@@ -52,25 +52,24 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_result_perfect"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_perfect">
 
         <ImageView
             android:id="@+id/iv_result_perfect_num_3"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_3" />
 
         <ImageView
             android:id="@+id/iv_result_perfect_num_2"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_2" />
 
         <ImageView
             android:id="@+id/iv_result_perfect_num_1"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_1" />
     </LinearLayout>
@@ -78,26 +77,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/iv_result_good"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_perfect">
 
         <ImageView
             android:id="@+id/iv_result_good_num_3"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_3" />
 
         <ImageView
             android:id="@+id/iv_result_good_num_2"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_2" />
 
         <ImageView
             android:id="@+id/iv_result_good_num_1"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_1" />
     </LinearLayout>
@@ -105,26 +103,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/iv_result_miss"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_perfect">
 
         <ImageView
             android:id="@+id/iv_result_miss_num_3"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_3" />
 
         <ImageView
             android:id="@+id/iv_result_miss_num_2"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_2" />
 
         <ImageView
             android:id="@+id/iv_result_miss_num_1"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_1" />
     </LinearLayout>
@@ -132,26 +129,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/iv_result_combo"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_perfect">
 
         <ImageView
             android:id="@+id/iv_result_combo_num_3"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_3" />
 
         <ImageView
             android:id="@+id/iv_result_combo_num_2"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_2" />
 
         <ImageView
             android:id="@+id/iv_result_combo_num_1"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_1" />
     </LinearLayout>
@@ -159,32 +155,31 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/iv_result_score"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_perfect">
 
         <ImageView
             android:id="@+id/iv_result_score_num_4"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_4" />
 
         <ImageView
             android:id="@+id/iv_result_score_num_3"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_3" />
 
         <ImageView
             android:id="@+id/iv_result_score_num_2"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_2" />
 
         <ImageView
             android:id="@+id/iv_result_score_num_1"
-            android:layout_width="40dp"
+            android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/num_1" />
     </LinearLayout>
@@ -193,16 +188,17 @@
         android:id="@+id/iv_result_clear"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="75dp"
         android:src="@drawable/game_clear"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/iv_result_restart"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_result_score" />
 
     <ImageView
         android:id="@+id/iv_result_restart"
         android:layout_width="100dp"
         android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/restart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -212,6 +208,7 @@
         android:id="@+id/iv_result_back"
         android:layout_width="70dp"
         android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/iv_result_restart"
