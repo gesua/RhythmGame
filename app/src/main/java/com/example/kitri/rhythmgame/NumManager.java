@@ -5,20 +5,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class NumManager {
-    private ImageView[] iv_combo = new ImageView[3];
-    private ImageView[] iv_score = new ImageView[4];
-    private int[] numImage = new int[10];
+    private int[] numImage = new int[10]; // 숫자
+    private ImageView[] ivCombo = new ImageView[3]; // 콤보
+    private ImageView[] ivScore = new ImageView[4]; // 스코어
 
     public NumManager(Activity context) {
-        iv_combo[0] = context.findViewById(R.id.tv_combo_1);
-        iv_combo[1] = context.findViewById(R.id.tv_combo_2);
-        iv_combo[2] = context.findViewById(R.id.tv_combo_3);
-
-        iv_score[0] = context.findViewById(R.id.iv_score_1);
-        iv_score[1] = context.findViewById(R.id.iv_score_2);
-        iv_score[2] = context.findViewById(R.id.iv_score_3);
-        iv_score[3] = context.findViewById(R.id.iv_score_4);
-
         numImage[0] = R.drawable.num_0;
         numImage[1] = R.drawable.num_1;
         numImage[2] = R.drawable.num_2;
@@ -29,6 +20,15 @@ public class NumManager {
         numImage[7] = R.drawable.num_7;
         numImage[8] = R.drawable.num_8;
         numImage[9] = R.drawable.num_9;
+
+        ivCombo[0] = context.findViewById(R.id.tv_combo_1);
+        ivCombo[1] = context.findViewById(R.id.tv_combo_2);
+        ivCombo[2] = context.findViewById(R.id.tv_combo_3);
+
+        ivScore[0] = context.findViewById(R.id.iv_score_1);
+        ivScore[1] = context.findViewById(R.id.iv_score_2);
+        ivScore[2] = context.findViewById(R.id.iv_score_3);
+        ivScore[3] = context.findViewById(R.id.iv_score_4);
     }
 
     public void setCombo(int combo) {
@@ -36,27 +36,27 @@ public class NumManager {
         while (combo > 0) {
             temp = combo;
             temp %= 10;
-            iv_combo[cnt++].setImageResource(numImage[temp]);
+            ivCombo[cnt++].setImageResource(numImage[temp]);
 
             combo /= 10;
         }
 
         int i;
         for (i = 0; i < cnt; i++) {
-            iv_combo[i].setVisibility(View.VISIBLE);
+            ivCombo[i].setVisibility(View.VISIBLE);
         }
 
-        for (int j = i; j < iv_combo.length; j++) {
-            iv_combo[j].setVisibility(View.GONE);
+        for (int j = i; j < ivCombo.length; j++) {
+            ivCombo[j].setVisibility(View.GONE);
         }
     }
 
     public void setScore(int score) {
         if (score == 0) {
-            iv_score[0].setImageResource(numImage[0]);
+            ivScore[0].setImageResource(numImage[0]);
 
-            for (int i = 1; i < iv_score.length; i++) {
-                iv_score[i].setVisibility(View.GONE);
+            for (int i = 1; i < ivScore.length; i++) {
+                ivScore[i].setVisibility(View.GONE);
             }
             return;
         }
@@ -65,18 +65,18 @@ public class NumManager {
         while (score > 0) {
             temp = score;
             temp %= 10;
-            iv_score[cnt++].setImageResource(numImage[temp]);
+            ivScore[cnt++].setImageResource(numImage[temp]);
 
             score /= 10;
         }
 
         int i;
         for (i = 0; i < cnt; i++) {
-            iv_score[i].setVisibility(View.VISIBLE);
+            ivScore[i].setVisibility(View.VISIBLE);
         }
 
-        for (int j = i; j < iv_score.length; j++) {
-            iv_score[j].setVisibility(View.GONE);
+        for (int j = i; j < ivScore.length; j++) {
+            ivScore[j].setVisibility(View.GONE);
         }
     }
 }

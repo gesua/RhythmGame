@@ -45,7 +45,6 @@ public class PlayActivity extends Activity {
     private boolean hit2 = false;
     private boolean hit3 = false;
     private boolean hit4 = false;
-    private String mm = "";
     private static MediaPlayer mp;
     private List<NoteVO> noteVOS = new ArrayList<>();
     private int deldteNoteCnt = 0;
@@ -55,7 +54,7 @@ public class PlayActivity extends Activity {
     private double startT = 0;
     private int startTime = 0;
     private List<Integer> deleteNoteList = new ArrayList<>();
-    private boolean dupl=false;
+    private boolean dupl = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,44 +136,11 @@ public class PlayActivity extends Activity {
                     ((ImageView) msg.obj).setVisibility(View.VISIBLE);
 
                 } else if (msg.what == 5) {
-                    if (misscnt == 0) {
-
-                        if (goodcnt == 0) {
-                            mm = "Perfect";
-
-                        } else {
-                            mm = "Full Combo";
-                        }
-
-                    }
                     if (!PlayActivity.this.isFinishing()) { //액티비티가 살아있는지 체크
                         alertDialog = new AlertDialog.Builder(PlayActivity.this);
                         mp.stop();
 
-                        alertDialog.setTitle("연주완료     " + mm).setMessage("SCORE : " + score2 + "\n" + "PERFECT : " + perfectcnt + "\n" + "GOOD : " + goodcnt + "\n" + "MISS : " + misscnt + "\n" + "MAXCOMBO : " + maxcom)
-                                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                        finish();
-
-                                    }
-                                })
-                                .setNegativeButton("다시하기", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                        Intent intent = new Intent(getApplicationContext(), PlayActivity.class);
-                                        intent.putExtra("111", (lineP + 100) + "");
-                                        startActivity(intent);
-
-                                        dialog.cancel();
-                                        finish();
-
-                                    }
-                                });
-                        dialog = alertDialog.show();
-                        dialog.setCancelable(false);
+                        resultOn(PlayActivity.this, true);
                     }
                 } else if (msg.what == 999) {
 
@@ -186,14 +152,14 @@ public class PlayActivity extends Activity {
 
                     for (int i = 0; i < noteVOS.size(); i++) {
 
-                        for(int y=0; y<deleteNoteList.size(); y++){
-                            if(deleteNoteList.get(y)==i){
-                                dupl=true;
+                        for (int y = 0; y < deleteNoteList.size(); y++) {
+                            if (deleteNoteList.get(y) == i) {
+                                dupl = true;
                             }
                         }
 
-                        if(dupl){
-                            dupl=false;
+                        if (dupl) {
+                            dupl = false;
                             continue; //이미 판정 끝난노트일시 컨티뉴
 
                         }
@@ -202,7 +168,7 @@ public class PlayActivity extends Activity {
                             float y = layout_play.getViewById(i).getY();
                             y += noteSpd; //노트스피드 기본 25 최소5 최대 75 (설정창에서는 /5해서 1~15
                             layout_play.getViewById(i).setY(y);
-                            if (y < loca.getBottom()+100) {
+                            if (y < loca.getBottom() + 100) {
                                 if (y > loca.getTop() - 100 && y < loca.getBottom() + 100 && layout_play.getViewById(i).getX() == (btn_key1.getX() + (btn_key1.getWidth() / 2) - (NOTE_WIDTH / 2)) && hit1) {
 
                                     hit1 = false;
@@ -303,7 +269,8 @@ public class PlayActivity extends Activity {
                                         down.interrupt();
                                         note.interrupt();
                                         mp.stop();
-                                        Toast.makeText(PlayActivity.this, "Game Over", Toast.LENGTH_SHORT).show();
+
+                                        resultOn(PlayActivity.this, false);
                                     }
 
                                     misscnt++;
@@ -496,5 +463,19 @@ public class PlayActivity extends Activity {
         } else {
             finish();
         }
+    }
+
+    // 결과창 띄움
+    void resultOn(Activity context, boolean clear) {
+        Intent intent = new Intent(context, ResultActivity.class);
+        intent.putExtra("score", score2);
+        intent.putExtra("perfect", perfectcnt);
+        intent.putExtra("good", goodcnt);
+        intent.putExtra("miss", misscnt);
+        intent.putExtra("combo", maxcom);
+        intent.putExtra("clear", clear);
+        startActivity(intent);
+
+        finish();
     }
 }
