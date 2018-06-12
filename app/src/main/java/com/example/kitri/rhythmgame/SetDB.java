@@ -22,14 +22,18 @@ public class SetDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String sql = "CREATE TABLE IF NOT EXISTS spd(" +
-                "num VARCHAR(30) NOT NULL UNIQUE " +
+                "num VARCHAR(30) NOT NULL UNIQUE, " +
+                "sync VARCHAR(30) NOT NULL UNIQUE " +
                 ")";
+
+
+
 
 
         db.execSQL(sql);
 
-        String sqll="INSERT INTO spd VALUES('25')";
-        db.execSQL(sqll);
+        String sqll="INSERT INTO spd VALUES('25','6')";
+               db.execSQL(sqll);
 
     }
 
@@ -55,8 +59,27 @@ public class SetDB extends SQLiteOpenHelper {
         return result;
     }
 
+    public String selectS() {
+        String result = "";
+        String sql = "SELECT sync FROM spd";
+
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.moveToNext()) {
+
+            result = cursor.getString(0);
+
+        }
+        return result;
+    }
+
     public void update(String num) { //
         String sql2 = "UPDATE spd SET num ='" + num + "'";
+        db.execSQL(sql2);
+    }
+
+    public void updateS(String sync) { //
+        String sql2 = "UPDATE spd SET sync ='" + sync + "'";
         db.execSQL(sql2);
     }
 }
