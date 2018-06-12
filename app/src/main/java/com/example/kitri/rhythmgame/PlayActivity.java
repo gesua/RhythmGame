@@ -337,7 +337,7 @@ public class PlayActivity extends Activity {
         MusicThead musicThead = new MusicThead(handler, startTime);
         musicThead.start();
 
-        note.setWaitTime(startTime + 3000); //마지막노트 판정선 지나는시간+3초 여유 후 결과창 다이얼로그
+        note.setWaitTime(startTime + 1000); //마지막노트 판정선 지나는시간+n초 여유 후 결과창 다이얼로그
 
         down = new Down(handler);
         down.start();
