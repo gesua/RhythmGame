@@ -2,6 +2,8 @@ package com.example.kitri.rhythmgame;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -20,7 +22,17 @@ public class SettingActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.custom_dialog);
+
+        Configuration config = getResources().getConfiguration(); //현재 가로인지 세로인지 받아오기
+
+        if(config.orientation == Configuration.ORIENTATION_LANDSCAPE){ //가로일시
+            setContentView(R.layout.custom_dialog2);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+        }else {
+            setContentView(R.layout.custom_dialog);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+        }
+
         setSpd = findViewById(R.id.spd_edit);
         ok = findViewById(R.id.ok);
         setSync = findViewById(R.id.sync_edit2);
@@ -118,7 +130,7 @@ public class SettingActivity extends Activity {
                         Toast.makeText(SettingActivity.this, "속도 : " + (sss / 5) +" / " + "싱크 : "+setSync.getText().toString(), Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        Toast.makeText(SettingActivity.this, "1~15이내로 입력해주세요", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SettingActivity.this, "속도(1~15)/싱크(1~12) 이내로 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
                 } catch (NumberFormatException e) {
                     Toast.makeText(SettingActivity.this, "숫자만 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -136,7 +148,7 @@ public class SettingActivity extends Activity {
         setSpd.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == android.view.KeyEvent.KEYCODE_ENTER) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
 
                     InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(setSpd.getWindowToken(), 0);    //hide keyboard
@@ -151,7 +163,7 @@ public class SettingActivity extends Activity {
         setSync.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == android.view.KeyEvent.KEYCODE_ENTER) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
 
 
                     InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);

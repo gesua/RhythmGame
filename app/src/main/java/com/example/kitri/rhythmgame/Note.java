@@ -13,6 +13,12 @@ public class Note extends Thread {
     private boolean wait = false;
     private int setNoteTime=3000;
     private int waitTime=0;
+    private int plusTime=0;
+    private boolean plus=false;
+
+    public void setPlusTime(int plusTime) {
+        this.plusTime = plusTime;
+    }
 
     public int getSetNoteTime() {
         return setNoteTime;
@@ -43,7 +49,12 @@ public class Note extends Thread {
             Thread.sleep(setNoteTime); //시작시 첫노트 대기시간
             for (int i = 0; i < number.size(); i++) { //size=노트개수
                 while(wait){
-                    Thread.sleep(1);
+                    plus=true;
+
+                }
+                if(plus){
+                    Thread.sleep(plusTime);
+                    plus=false;
                 }
                 Message msg = new Message();
                 msg.what = number.get(i).getType(); //노트 라인

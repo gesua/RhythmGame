@@ -14,6 +14,10 @@ public class Down extends Thread {
 
     }
 
+    public boolean isWait() {
+        return wait;
+    }
+
     public void setWait(boolean wait) {
         this.wait = wait;
     }

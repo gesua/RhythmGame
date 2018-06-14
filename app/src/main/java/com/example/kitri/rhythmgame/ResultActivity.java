@@ -2,9 +2,13 @@ package com.example.kitri.rhythmgame;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -16,18 +20,29 @@ public class ResultActivity extends Activity {
     private ImageView[] ivResultMiss = new ImageView[3];
     private ImageView[] ivResultCombo = new ImageView[3];
     private ImageView[] ivResultScore = new ImageView[4];
-    private int lineP=0;
+    private int lineP = 0;
 
-    private ImageView iv_restart,iv_back;
+    private ImageView iv_restart, iv_back;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        Configuration config = getResources().getConfiguration(); //현재 가로인지 세로인지 받아오기
+
+        if(config.orientation == Configuration.ORIENTATION_LANDSCAPE){ //가로일시
+            setContentView(R.layout.activity_result2);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }else {
+            setContentView(R.layout.activity_result);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
         ivResultClear = findViewById(R.id.iv_result_clear);
-        iv_restart=findViewById(R.id.iv_result_restart);
-        iv_back=findViewById(R.id.iv_result_back);
+        iv_restart = findViewById(R.id.iv_result_restart);
+        iv_back = findViewById(R.id.iv_result_back);
 
         ivResultPerfect[0] = findViewById(R.id.iv_result_perfect_num_1);
         ivResultPerfect[1] = findViewById(R.id.iv_result_perfect_num_2);
@@ -57,7 +72,8 @@ public class ResultActivity extends Activity {
         int combo = get.getIntExtra("combo", -1);
         int score = get.getIntExtra("score", -1);
         boolean clear = get.getBooleanExtra("clear", false);
-        lineP=Integer.parseInt(get.getStringExtra("222").trim());
+        lineP = Integer.parseInt(get.getStringExtra("222").trim());
+
 
         // 클리어 및 풀콤보 표시
         if (clear == false) {
@@ -81,10 +97,9 @@ public class ResultActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), PlayActivity.class);
-                intent.putExtra("333",lineP+"");
+                intent.putExtra("333", lineP + "");
                 startActivity(intent);
                 finish();
-
 
             }
         });
@@ -98,9 +113,9 @@ public class ResultActivity extends Activity {
 
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(0, 0);
+        @Override
+        public void finish () {
+            super.finish();
+            overridePendingTransition(0, 0);
+        }
     }
-}
